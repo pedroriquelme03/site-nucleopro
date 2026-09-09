@@ -1,0 +1,238 @@
+.carousel-wrapper {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #08090b;
+  color: #fff;
+  user-select: none;
+}
+
+.carousel-bg-wash {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  transition: background 0.8s ease;
+}
+
+.carousel-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  min-height: min(78vh, 760px);
+  grid-template-columns: 1fr 1fr;
+}
+
+.carousel-content {
+  display: flex;
+  align-items: center;
+  padding: 4rem 3rem 2rem;
+}
+
+.carousel-content-inner {
+  max-width: 34rem;
+}
+
+.carousel-title,
+.carousel-subtitle,
+.carousel-description {
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
+}
+
+.carousel-title.transitioning,
+.carousel-subtitle.transitioning,
+.carousel-description.transitioning {
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+.carousel-title.visible,
+.carousel-subtitle.visible,
+.carousel-description.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.carousel-title {
+  font-family: Sora, Inter, sans-serif;
+  font-size: clamp(2.4rem, 4.6vw, 4.4rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+
+.carousel-subtitle {
+  margin-top: 1.1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.carousel-description {
+  margin-top: 1.25rem;
+  max-width: 32rem;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: rgb(148 163 184);
+}
+
+.carousel-nav-arrows {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 2.5rem;
+}
+
+.carousel-arrow-btn {
+  display: grid;
+  height: 2.75rem;
+  width: 2.75rem;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  background: rgba(8, 9, 11, 0.75);
+  color: rgb(203 213 225);
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.carousel-arrow-btn:hover {
+  border-color: rgba(255, 255, 255, 0.28);
+  color: #fff;
+}
+
+.carousel-arrow-btn:active {
+  transform: scale(0.95);
+}
+
+.carousel-image-container {
+  position: relative;
+  min-height: 420px;
+  padding: 1.75rem 1.75rem 1.75rem 0;
+}
+
+.carousel-image-frame {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 0.35rem;
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
+}
+
+.carousel-image-frame.transitioning {
+  opacity: 0;
+  transform: scale(1.04);
+}
+
+.carousel-image-frame.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.carousel-image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  animation: carousel-kenburns 6.4s ease-out forwards;
+}
+
+.carousel-image-overlay {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+}
+
+.carousel-progress-bar {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 1.25rem;
+  padding: 0.5rem 3rem 2.5rem;
+}
+
+.carousel-progress-item {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.carousel-progress-track {
+  height: 2px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.carousel-progress-fill {
+  height: 100%;
+  width: 0;
+  background: #a97c50;
+  transition: width 50ms linear;
+}
+
+.carousel-progress-label {
+  display: block;
+  overflow: hidden;
+  margin-top: 0.65rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.38);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.carousel-progress-item.active .carousel-progress-label {
+  color: #fff;
+}
+
+@keyframes carousel-kenburns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+
+@media (max-width: 900px) {
+  .carousel-inner {
+    min-height: 0;
+    grid-template-columns: 1fr;
+  }
+
+  .carousel-image-container {
+    order: -1;
+    min-height: 52vw;
+    padding: 1rem 1rem 0;
+  }
+
+  .carousel-content {
+    padding: 2rem 1.25rem 0.5rem;
+  }
+
+  .carousel-progress-bar {
+    gap: 0.7rem;
+    padding: 1.25rem 1.25rem 2rem;
+  }
+
+  .carousel-progress-label {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel-image {
+    animation: none;
+  }
+}

@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-x: clip;
+    overscroll-behavior-x: none;
+  }
+
+  body {
+    @apply bg-ink-950 text-slate-100 font-sans antialiased;
+    background-image: radial-gradient(
+        60rem 40rem at 80% -10%,
+        rgba(169, 124, 80, 0.10),
+        transparent 60%
+      ),
+      radial-gradient(50rem 40rem at -10% 20%, rgba(169, 124, 80, 0.06), transparent 55%);
+  }
+
+  ::selection {
+    @apply bg-brand/30 text-white;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display;
+  }
+}
+
+@layer utilities {
+  .container-x {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-br from-white via-white to-brand/70 bg-clip-text text-transparent;
+  }
+
+  .glass {
+    background: rgba(17, 20, 24, 0.7);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .hairline {
+    @apply border border-line;
+  }
+
+  .brand-marquee {
+    animation: marquee 48s linear infinite;
+    width: max-content;
+    will-change: transform;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

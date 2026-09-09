@@ -1,0 +1,25 @@
+.brazil-map svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.brazil-map path {
+  cursor: pointer;
+  fill: #8d643c;
+  outline: none;
+  pointer-events: visiblePainted;
+  stroke: #08090b;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 0.7;
+  transition: fill 0.15s ease, stroke 0.15s ease;
+}
+
+.brazil-map path:hover,
+.brazil-map path:focus-visible,
+.brazil-map path[data-active="true"] {
+  fill: #c9a06e;
+  stroke: #f3e6d2;
+  stroke-width: 1.15;
+}
