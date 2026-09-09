@@ -5,6 +5,7 @@ import { WhatsAppIcon } from "./WhatsAppIcon";
 import { cn, WHATSAPP_URL } from "@/lib/utils";
 
 const links = [
+  { label: "Catálogo", href: "/catalogo" },
   { label: "Marcas", href: "/marcas" },
   { label: "Onde comprar", href: "/#onde-comprar" },
   { label: "Notícias", href: "/#noticias" },

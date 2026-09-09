@@ -18,6 +18,7 @@ import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
 import { FloatingWhatsApp } from "./components/FloatingWhatsApp";
 import { MarcasPage } from "./components/MarcasPage";
+import { CatalogPage } from "./components/CatalogPage";
 import { SobreNosPage } from "./components/SobreNosPage";
 import { SitemapPage } from "./components/SitemapPage";
 import { PrivacyPage } from "./components/PrivacyPage";
@@ -73,6 +74,14 @@ export default function App() {
     return (
       <Layout>
         <MarcasPage />
+      </Layout>
+    );
+  }
+
+  if (path === "/catalogo") {
+    return (
+      <Layout>
+        <CatalogPage />
       </Layout>
     );
   }
