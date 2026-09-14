@@ -22,7 +22,7 @@ const FEATURED_BADGES: Record<string, string> = {
 
 const filters: { id: Filter; label: string }[] = [
   { id: "todos", label: "Todos" },
-  ...catalogCategories.map((c) => ({ id: c.id as Filter, label: c.short })),
+  ...catalogCategories.slice(0, 6).map((c) => ({ id: c.id as Filter, label: c.short })),
 ];
 
 const arrowClass =

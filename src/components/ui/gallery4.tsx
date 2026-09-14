@@ -25,15 +25,11 @@ export interface Gallery4Props {
 
 export function Gallery4({ title, description, items, cta }: Gallery4Props) {
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
-  const [canScrollPrev, setCanScrollPrev] = useState(false);
-  const [canScrollNext, setCanScrollNext] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
     if (!carouselApi) return;
     const updateSelection = () => {
-      setCanScrollPrev(carouselApi.canScrollPrev());
-      setCanScrollNext(carouselApi.canScrollNext());
       setCurrentSlide(carouselApi.selectedScrollSnap());
     };
     updateSelection();
@@ -43,10 +39,22 @@ export function Gallery4({ title, description, items, cta }: Gallery4Props) {
     };
   }, [carouselApi]);
 
+  const scrollPrev = () => {
+    if (!carouselApi) return;
+    if (carouselApi.canScrollPrev()) carouselApi.scrollPrev();
+    else carouselApi.scrollTo(items.length - 1);
+  };
+
+  const scrollNext = () => {
+    if (!carouselApi) return;
+    if (carouselApi.canScrollNext()) carouselApi.scrollNext();
+    else carouselApi.scrollTo(0);
+  };
+
   const isExternal = (href: string) => href.startsWith("http");
 
   const arrowClass =
-    "absolute top-1/2 z-20 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-ink-950/90 text-slate-300 shadow-md backdrop-blur-sm transition-all duration-200 hover:border-white/20 hover:text-white active:scale-95 disabled:pointer-events-none disabled:opacity-40 sm:h-10 sm:w-10";
+    "absolute top-1/2 z-20 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-ink-950/90 text-slate-300 shadow-md backdrop-blur-sm transition-all duration-200 hover:border-white/20 hover:text-white active:scale-95 sm:h-10 sm:w-10";
 
   return (
     <div>
@@ -80,6 +88,7 @@ export function Gallery4({ title, description, items, cta }: Gallery4Props) {
           setApi={setCarouselApi}
           opts={{
             align: "start",
+            loop: true,
             breakpoints: {
               "(max-width: 768px)": {
                 dragFree: true,
@@ -122,8 +131,7 @@ export function Gallery4({ title, description, items, cta }: Gallery4Props) {
 
         <button
           type="button"
-          onClick={() => carouselApi?.scrollPrev()}
-          disabled={!canScrollPrev}
+          onClick={scrollPrev}
           className={cn(arrowClass, "left-1 sm:left-0 sm:-translate-x-1/2")}
           aria-label="Categoria anterior"
         >
@@ -131,8 +139,7 @@ export function Gallery4({ title, description, items, cta }: Gallery4Props) {
         </button>
         <button
           type="button"
-          onClick={() => carouselApi?.scrollNext()}
-          disabled={!canScrollNext}
+          onClick={scrollNext}
           className={cn(arrowClass, "right-1 sm:right-0 sm:translate-x-1/2")}
           aria-label="Próxima categoria"
         >

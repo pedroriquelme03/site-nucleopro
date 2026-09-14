@@ -70,7 +70,7 @@ export function Footer() {
               Linhas Mackie
             </h4>
             <ul className="mt-4 space-y-2.5">
-              {catalogCategories.map((c) => (
+              {catalogCategories.slice(0, 4).map((c) => (
                 <li key={c.id}>
                   <a
                     href={`/catalogo?categoria=${c.id}`}
@@ -80,6 +80,14 @@ export function Footer() {
                   </a>
                 </li>
               ))}
+              <li>
+                <a
+                  href="/catalogo?categoria=todos"
+                  className="text-sm text-slate-400 transition-colors hover:text-brand"
+                >
+                  Ver Todas
+                </a>
+              </li>
             </ul>
           </div>
 

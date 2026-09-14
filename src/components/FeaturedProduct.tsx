@@ -1,5 +1,4 @@
 import ElegantCarousel, { type SlideData } from "@/components/ui/elegant-carousel";
-import { SectionHeading } from "./SectionHeading";
 
 const featuredSlides: SlideData[] = [
   {
@@ -43,15 +42,7 @@ const featuredSlides: SlideData[] = [
 export function FeaturedProduct() {
   return (
     <section id="destaque" className="border-t border-line bg-ink-950 pt-16 sm:pt-20">
-      <div className="container-x">
-        <SectionHeading
-          title="Produto em destaque"
-          description="Os equipamentos Mackie que mais saem para palco, igreja e instalação — com garantia oficial no Brasil."
-        />
-      </div>
-      <div className="mt-10">
-        <ElegantCarousel slides={featuredSlides} />
-      </div>
+      <ElegantCarousel slides={featuredSlides} />
     </section>
   );
 }
