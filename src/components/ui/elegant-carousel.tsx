@@ -49,7 +49,7 @@ const defaultSlides: SlideData[] = [
   },
 ];
 
-const SLIDE_DURATION = 6000;
+const SLIDE_DURATION = 3000;
 const TRANSITION_DURATION = 800;
 
 export default function ElegantCarousel({
@@ -61,7 +61,6 @@ export default function ElegantCarousel({
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [direction, setDirection] = useState<"next" | "prev">("next");
   const [progress, setProgress] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const progressRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const touchStartX = useRef(0);
@@ -95,8 +94,6 @@ export default function ElegantCarousel({
   }, [currentIndex, goToSlide, slides.length]);
 
   useEffect(() => {
-    if (isPaused) return;
-
     progressRef.current = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) return 100;
@@ -112,7 +109,7 @@ export default function ElegantCarousel({
       if (intervalRef.current) clearInterval(intervalRef.current);
       if (progressRef.current) clearInterval(progressRef.current);
     };
-  }, [currentIndex, isPaused, goNext]);
+  }, [currentIndex, goNext]);
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.targetTouches[0].clientX;
@@ -136,8 +133,6 @@ export default function ElegantCarousel({
     <div
       className="carousel-wrapper"
       data-direction={direction}
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}

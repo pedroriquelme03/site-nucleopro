@@ -23,8 +23,7 @@ export function WhereToBuy() {
             Encontre um revendedor Nucleopro perto de você.
           </p>
           <p className="mt-4 max-w-md text-base leading-relaxed text-slate-500">
-            Passe o mouse no estado para ver o contato. A Núcleo indica o dealer mais próximo —
-            produto original e suporte oficial Mackie.
+            Clique no estado para ver o contato. Depois use o botão para falar no WhatsApp.
           </p>
           <a
             href={dealerUrl}

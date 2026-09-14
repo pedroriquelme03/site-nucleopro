@@ -18,7 +18,8 @@
 
 .brazil-map path:hover,
 .brazil-map path:focus-visible,
-.brazil-map path[data-active="true"] {
+.brazil-map path[data-active="true"],
+.brazil-map path[data-selected="true"] {
   fill: #c9a06e;
   stroke: #f3e6d2;
   stroke-width: 1.15;

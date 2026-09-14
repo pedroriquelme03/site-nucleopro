@@ -1,59 +1,14 @@
-import { useEffect, useRef, useState, type RefObject } from "react";
-import { ArrowRight } from "lucide-react";
-import { ShaderBackground } from "@/components/ui/mesh-drift-shader";
-import { cn, WHATSAPP_URL } from "@/lib/utils";
-import { WhatsAppIcon } from "./WhatsAppIcon";
+import { useEffect, useState } from "react";
+import { ChevronDown, ChevronUp } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-const SPEAKER_SRC = "/products/Mackie-Thump15v4-3Q-Hero-Left-US.webp";
-const YOUTUBE_ID = "6tzq0mbnFww";
-
-const SLIDES = [
-  { id: "hero", label: "Destaque Núcleo ProAudio" },
-  { id: "video", label: "Vídeo em tela cheia" },
+const VIDEOS = [
+  { id: "6tzq0mbnFww", label: "Mackie ThumpSub GO" },
+  { id: "bzP9--xFRnU", label: "Mackie Thump v4" },
+  { id: "oNEWCcsTgIs", label: "Mackie ProFX10 GO" },
 ] as const;
 
-function ScrollScaleSpeaker({ sectionRef }: { sectionRef: RefObject<HTMLElement | null> }) {
-  const imgRef = useRef<HTMLImageElement>(null);
-
-  useEffect(() => {
-    const img = imgRef.current;
-    const section = sectionRef.current;
-    if (!img || !section) return;
-
-    const reduced =
-      typeof window.matchMedia === "function" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    const update = () => {
-      if (reduced) {
-        img.style.transform = "scale(1)";
-        return;
-      }
-      const max = section.offsetHeight - window.innerHeight;
-      const progress = max <= 0 ? 0 : Math.min(1, Math.max(0, -section.getBoundingClientRect().top / max));
-      img.style.transform = `scale(${1 + progress * 0.2})`;
-    };
-
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-    update();
-    return () => {
-      window.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
-    };
-  }, [sectionRef]);
-
-  return (
-    <img
-      ref={imgRef}
-      src={SPEAKER_SRC}
-      alt="Mackie Thump 15"
-      className="mx-auto h-[280px] w-auto origin-center object-contain will-change-transform sm:h-[320px] lg:mx-0 lg:h-[420px] xl:h-[460px]"
-    />
-  );
-}
-
-function YouTubeCover({ videoId }: { videoId: string }) {
+function YouTubeCover({ videoId, title }: { videoId: string; title: string }) {
   const src = new URL(`https://www.youtube-nocookie.com/embed/${videoId}`);
   src.search = new URLSearchParams({
     autoplay: "1",
@@ -74,7 +29,7 @@ function YouTubeCover({ videoId }: { videoId: string }) {
     <div className="absolute inset-0 overflow-hidden bg-black" aria-hidden>
       <iframe
         src={src.toString()}
-        title="Vídeo Núcleo ProAudio"
+        title={title}
         allow="autoplay; encrypted-media; picture-in-picture"
         allowFullScreen={false}
         tabIndex={-1}
@@ -84,100 +39,122 @@ function YouTubeCover({ videoId }: { videoId: string }) {
   );
 }
 
+const SLIDE_MS = 12_000;
+
 export function Hero() {
-  const sectionRef = useRef<HTMLElement>(null);
   const [slide, setSlide] = useState(0);
-  const isVideo = slide === 1;
+  const [paused, setPaused] = useState(false);
+  const [hidden, setHidden] = useState(false);
+
+  const go = (direction: -1 | 1) => {
+    setSlide((current) => (current + direction + VIDEOS.length) % VIDEOS.length);
+  };
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "ArrowUp") {
+        event.preventDefault();
+        go(-1);
+      }
+      if (event.key === "ArrowDown") {
+        event.preventDefault();
+        go(1);
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
+
+  useEffect(() => {
+    const onVisibility = () => setHidden(document.hidden);
+    onVisibility();
+    document.addEventListener("visibilitychange", onVisibility);
+    return () => document.removeEventListener("visibilitychange", onVisibility);
+  }, []);
+
+  useEffect(() => {
+    const reduced =
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (paused || hidden || reduced) return;
+
+    const id = window.setInterval(() => {
+      setSlide((current) => (current + 1) % VIDEOS.length);
+    }, SLIDE_MS);
+
+    return () => window.clearInterval(id);
+  }, [slide, paused, hidden]);
 
   return (
-    <section id="top" ref={sectionRef} className="relative h-[180vh] w-full">
-      <div className="sticky top-0 isolate h-svh overflow-hidden bg-black">
-        <div
-          className={cn(
-            "absolute inset-0 transition-opacity duration-700",
-            isVideo ? "pointer-events-none opacity-0" : "opacity-100",
-          )}
-        >
-          <ShaderBackground className="pointer-events-none absolute inset-0 h-full w-full" />
-          <div aria-hidden className="pointer-events-none absolute inset-0 z-[1] bg-black/25" />
+    <section id="top" className="relative h-svh w-full overflow-hidden bg-black">
+      <h1 className="sr-only">Qualidade em cada som, do estúdio ao palco.</h1>
+
+      {VIDEOS.map((video, index) => {
+        const active = slide === index;
+        return (
           <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-r from-black/55 via-black/15 to-transparent"
-          />
-        </div>
-
-        {isVideo ? <YouTubeCover videoId={YOUTUBE_ID} /> : null}
-
-        <div
-          className={cn(
-            "relative z-10 mx-auto flex h-full w-full max-w-7xl items-center px-6 pt-28 pb-16 pr-14 transition-opacity duration-700 sm:px-10 sm:pr-16 md:pt-32 lg:px-20 lg:pr-24 lg:pt-36",
-            isVideo ? "pointer-events-none opacity-0" : "opacity-100",
-          )}
-        >
-          <div className="grid w-full items-center gap-10 pt-4 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-16 lg:pt-6 xl:grid-cols-[minmax(0,1fr)_460px]">
-            <div className="max-w-[34rem]">
-              <h1 className="bg-gradient-to-br from-white via-[#f3e6d2] via-[58%] to-[#a97c50] bg-clip-text font-display text-[2.5rem] font-light leading-[1.05] tracking-[-0.03em] text-transparent sm:text-6xl lg:text-[4.25rem]">
-                Qualidade em cada som,
-                <br />
-                do estúdio ao palco.
-              </h1>
-
-              <p className="mt-6 max-w-md text-[0.95rem] leading-relaxed text-white/60 md:mt-7">
-                A Núcleo ProAudio é a distribuidora oficial Mackie no Brasil.
-                Equipamentos de áudio high-end com suporte técnico especializado,
-                assistência pós-venda e entrega em todo o território nacional.
-              </p>
-
-              <div className="mt-8 flex flex-wrap items-center gap-3 md:mt-10">
-                <a
-                  href={WHATSAPP_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                  tabIndex={isVideo ? -1 : undefined}
-                  className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-white to-white px-6 py-3 text-sm font-medium text-ink-950 transition-all hover:to-[#a97c50]"
-                >
-                  <WhatsAppIcon className="h-4 w-4" />
-                  Fale com um especialista
-                </a>
-                <a
-                  href="#produtos"
-                  tabIndex={isVideo ? -1 : undefined}
-                  className="group inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-sm text-white/80 transition hover:border-white/40 hover:text-white"
-                >
-                  Ver produtos
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                </a>
-              </div>
-            </div>
-
-            <ScrollScaleSpeaker sectionRef={sectionRef} />
+            key={video.id}
+            className={cn(
+              "absolute inset-0 transition-opacity duration-700",
+              active ? "opacity-100" : "pointer-events-none opacity-0",
+            )}
+          >
+            {active ? <YouTubeCover videoId={video.id} title={video.label} /> : null}
           </div>
-        </div>
+        );
+      })}
 
-        <nav
-          aria-label="Slides do destaque"
-          className="absolute right-4 top-1/2 z-20 flex -translate-y-1/2 flex-col items-center gap-3 sm:right-6 lg:right-8"
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-y-0 right-0 z-10 w-28 bg-gradient-to-l from-black/55 to-transparent"
+      />
+
+      <nav
+        aria-label="Vídeos do destaque"
+        className="absolute right-3 top-1/2 z-20 flex -translate-y-1/2 flex-col items-center gap-3 sm:right-6 lg:right-8"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
+        <button
+          type="button"
+          aria-label="Vídeo anterior"
+          onClick={() => go(-1)}
+          className="grid h-9 w-9 place-items-center rounded-full text-white/70 transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
         >
-          {SLIDES.map((item, index) => {
+          <ChevronUp className="h-6 w-6" strokeWidth={2.25} />
+        </button>
+
+        <div className="flex flex-col items-center gap-3.5">
+          {VIDEOS.map((video, index) => {
             const active = slide === index;
             return (
               <button
-                key={item.id}
+                key={video.id}
                 type="button"
-                aria-label={item.label}
+                aria-label={video.label}
                 aria-current={active ? "true" : undefined}
                 onClick={() => setSlide(index)}
                 className={cn(
                   "rounded-full transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand",
                   active
-                    ? "h-2.5 w-2.5 bg-brand shadow-glow-sm"
-                    : "h-2 w-2 bg-white/35 hover:bg-white/70",
+                    ? "h-3.5 w-3.5 bg-brand shadow-glow-sm"
+                    : "h-3 w-3 bg-white/40 hover:bg-white/80",
                 )}
               />
             );
           })}
-        </nav>
-      </div>
+        </div>
+
+        <button
+          type="button"
+          aria-label="Próximo vídeo"
+          onClick={() => go(1)}
+          className="grid h-9 w-9 place-items-center rounded-full text-white/70 transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+        >
+          <ChevronDown className="h-6 w-6" strokeWidth={2.25} />
+        </button>
+      </nav>
     </section>
   );
 }

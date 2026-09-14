@@ -3,6 +3,9 @@ import { LegalBlock, LegalLayout } from "./LegalLayout";
 const pages = [
   { label: "Home", href: "/" },
   { label: "Bio / Links", href: "/bio" },
+  { label: "Catálogo", href: "/catalogo" },
+  { label: "Manuais", href: "/manuais" },
+  { label: "Blog", href: "/blog" },
   { label: "Marcas", href: "/marcas" },
   { label: "Sobre nós", href: "/sobre-nos" },
   { label: "Política de privacidade", href: "/politica-de-privacidade" },
@@ -11,9 +14,8 @@ const pages = [
 
 const sections = [
   { label: "Produtos", href: "/#produtos" },
-  { label: "Projetos", href: "/#projetos" },
-  { label: "Monte seu sistema", href: "/#sistema" },
-  { label: "Quem usa", href: "/#quem-usa" },
+  { label: "Categorias", href: "/#categorias" },
+  { label: "Lojas parceiras", href: "/#quem-usa" },
   { label: "Onde comprar", href: "/#onde-comprar" },
   { label: "Suporte", href: "/#sobre" },
   { label: "Notícias", href: "/#noticias" },

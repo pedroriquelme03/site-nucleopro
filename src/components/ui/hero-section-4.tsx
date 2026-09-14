@@ -55,7 +55,7 @@ const HeroSection = React.forwardRef<HTMLElement, HeroSectionProps>(
       <section
         ref={ref}
         className={cn(
-          "relative flex h-screen min-h-[700px] w-full items-center justify-center overflow-hidden",
+          "relative flex min-h-[min(85svh,700px)] w-full items-center justify-center overflow-hidden sm:min-h-[700px] sm:h-screen",
           className,
         )}
         {...props}
@@ -75,26 +75,26 @@ const HeroSection = React.forwardRef<HTMLElement, HeroSectionProps>(
           viewport={{ once: true, amount: 0.4 }}
         >
           <motion.h2
-            className="font-display text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
+            className="px-1 font-display text-[1.85rem] font-bold leading-tight tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
             variants={itemVariants}
           >
             {title}
           </motion.h2>
 
           <motion.p
-            className="mt-6 max-w-2xl text-lg leading-8 text-white/80 md:text-xl"
+            className="mt-5 max-w-2xl text-base leading-7 text-white/80 sm:mt-6 sm:text-lg md:text-xl md:leading-8"
             variants={itemVariants}
           >
             {subtitle}
           </motion.p>
 
-          <motion.div className="mt-10 flex flex-wrap items-center justify-center gap-4" variants={itemVariants}>
-            <Button asChild size="lg">
+          <motion.div className="mt-8 flex w-full max-w-sm flex-col items-stretch gap-3 sm:mt-10 sm:max-w-none sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-4" variants={itemVariants}>
+            <Button asChild size="lg" className="w-full sm:w-auto">
               <a href={primaryButtonHref} target={primaryButtonHref.startsWith("http") ? "_blank" : undefined} rel={primaryButtonHref.startsWith("http") ? "noreferrer" : undefined}>
                 {primaryButtonText}
               </a>
             </Button>
-            <Button asChild variant="outline" size="lg">
+            <Button asChild variant="outline" size="lg" className="w-full sm:w-auto">
               <a href={secondaryButtonHref}>{secondaryButtonText}</a>
             </Button>
           </motion.div>

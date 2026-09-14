@@ -15,8 +15,8 @@ export function WhoUses() {
   return (
     <Logos3
       id="quem-usa"
-      heading="Quem usa"
-      description="Logos, artistas, empresas, igrejas e locadoras."
+      heading="Lojas parceiras"
+      description="Revendedores oficiais Mackie em todo o Brasil."
       logos={logos}
       className="scroll-mt-20 border-t border-line bg-ink-950"
     />

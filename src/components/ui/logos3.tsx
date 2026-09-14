@@ -29,7 +29,7 @@ const defaultLogos: Logo[] = [
 ];
 
 const Logos3 = ({
-  heading = "Quem usa",
+  heading = "Lojas parceiras",
   description,
   logos = defaultLogos,
   className,

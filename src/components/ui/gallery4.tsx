@@ -46,7 +46,7 @@ export function Gallery4({ title, description, items, cta }: Gallery4Props) {
   const isExternal = (href: string) => href.startsWith("http");
 
   const arrowClass =
-    "absolute top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-ink-950 text-slate-300 shadow-md backdrop-blur-sm transition-all duration-200 hover:border-white/20 hover:text-white active:scale-95 disabled:pointer-events-none disabled:opacity-40";
+    "absolute top-1/2 z-20 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-ink-950/90 text-slate-300 shadow-md backdrop-blur-sm transition-all duration-200 hover:border-white/20 hover:text-white active:scale-95 disabled:pointer-events-none disabled:opacity-40 sm:h-10 sm:w-10";
 
   return (
     <div>
@@ -89,14 +89,14 @@ export function Gallery4({ title, description, items, cta }: Gallery4Props) {
         >
           <CarouselContent className="-ml-0">
             {items.map((item) => (
-              <CarouselItem key={item.id} className="max-w-[320px] pl-5 lg:max-w-[360px]">
+              <CarouselItem key={item.id} className="max-w-[min(320px,85vw)] pl-4 sm:pl-5 lg:max-w-[360px]">
                 <a
                   href={item.href}
                   target={isExternal(item.href) ? "_blank" : undefined}
                   rel={isExternal(item.href) ? "noreferrer" : undefined}
                   className="group block rounded-xl"
                 >
-                  <div className="relative h-full min-h-[27rem] max-w-full overflow-hidden rounded-xl border border-line md:aspect-[5/4] lg:aspect-[16/9]">
+                  <div className="relative h-full min-h-[22rem] max-w-full overflow-hidden rounded-xl border border-line sm:min-h-[27rem] md:aspect-[5/4] lg:aspect-[16/9]">
                     <img
                       src={item.image}
                       alt={item.title}
@@ -109,7 +109,7 @@ export function Gallery4({ title, description, items, cta }: Gallery4Props) {
                       </p>
                       <div className="mb-2 mt-2 text-xl font-semibold md:mb-3">{item.title}</div>
                       <div className="flex items-center text-sm text-white/90">
-                        Ver projeto
+                        Ver categoria
                         <ArrowRight className="ml-2 size-5 transition-transform group-hover:translate-x-1" />
                       </div>
                     </div>
@@ -124,8 +124,8 @@ export function Gallery4({ title, description, items, cta }: Gallery4Props) {
           type="button"
           onClick={() => carouselApi?.scrollPrev()}
           disabled={!canScrollPrev}
-          className={cn(arrowClass, "left-0 -translate-x-1/2")}
-          aria-label="Projeto anterior"
+          className={cn(arrowClass, "left-1 sm:left-0 sm:-translate-x-1/2")}
+          aria-label="Categoria anterior"
         >
           <ChevronLeft className="h-4 w-4" />
         </button>
@@ -133,8 +133,8 @@ export function Gallery4({ title, description, items, cta }: Gallery4Props) {
           type="button"
           onClick={() => carouselApi?.scrollNext()}
           disabled={!canScrollNext}
-          className={cn(arrowClass, "right-0 translate-x-1/2")}
-          aria-label="Próximo projeto"
+          className={cn(arrowClass, "right-1 sm:right-0 sm:translate-x-1/2")}
+          aria-label="Próxima categoria"
         >
           <ChevronRight className="h-4 w-4" />
         </button>
@@ -149,7 +149,7 @@ export function Gallery4({ title, description, items, cta }: Gallery4Props) {
               currentSlide === index ? "bg-brand" : "bg-brand/20"
             }`}
             onClick={() => carouselApi?.scrollTo(index)}
-            aria-label={`Ir para o projeto ${index + 1}`}
+            aria-label={`Ir para a categoria ${index + 1}`}
           />
         ))}
       </div>

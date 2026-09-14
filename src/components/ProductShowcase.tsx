@@ -1,20 +1,32 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { categories, products, type CategoryId } from "@/data/products";
+import {
+  catalogCategories,
+  catalogProducts,
+  type CatalogCategoryId,
+} from "@/data/catalog";
 import { cn } from "@/lib/utils";
 import { SectionHeading } from "./SectionHeading";
 import { ProductCard } from "./ProductCard";
 import PillMorphTabs from "@/components/ui/pill-morph-tabs";
 
-type Filter = "todos" | CategoryId;
+type Filter = "todos" | CatalogCategoryId;
+
+const FEATURED_BADGES: Record<string, string> = {
+  "thump215xt": "Destaque",
+  "thumpgo": "GO",
+  "dlz-creator": "Novo",
+  "srm-flex": "PA",
+  "profx12v3": "Mix",
+};
 
 const filters: { id: Filter; label: string }[] = [
   { id: "todos", label: "Todos" },
-  ...categories.map((c) => ({ id: c.id as Filter, label: c.short })),
+  ...catalogCategories.map((c) => ({ id: c.id as Filter, label: c.short })),
 ];
 
 const arrowClass =
-  "absolute top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-ink-950 text-slate-300 shadow-md backdrop-blur-sm transition-all duration-200 hover:border-white/20 hover:text-white active:scale-95";
+  "absolute top-1/2 z-20 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-ink-950/90 text-slate-300 shadow-md backdrop-blur-sm transition-all duration-200 hover:border-white/20 hover:text-white active:scale-95 sm:h-10 sm:w-10";
 
 export function ProductShowcase() {
   const [active, setActive] = useState<Filter>("todos");
@@ -22,8 +34,12 @@ export function ProductShowcase() {
 
   const visible = useMemo(() => {
     const list =
-      active === "todos" ? products : products.filter((p) => p.category === active);
-    return [...list].sort((a, b) => Number(b.featured) - Number(a.featured));
+      active === "todos"
+        ? catalogProducts
+        : catalogProducts.filter((p) => p.category === active);
+    return [...list].sort(
+      (a, b) => Number(Boolean(FEATURED_BADGES[b.slug])) - Number(Boolean(FEATURED_BADGES[a.slug])),
+    );
   }, [active]);
 
   const scrollByCard = (direction: -1 | 1) => {
@@ -51,7 +67,7 @@ export function ProductShowcase() {
       <div className="container-x">
         <div className="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-end">
           <SectionHeading
-            title="Produtos em destaque"
+            title="Linha de produtos"
             description="Do controlador de estúdio ao mixer digital de palco — a linha Mackie completa, pronta para entrega no Brasil."
           />
         </div>
@@ -66,14 +82,14 @@ export function ProductShowcase() {
         <div className="relative mt-10">
           <div
             ref={sliderRef}
-            className="flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-2 pt-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+            className="flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-2 pt-2 touch-pan-x [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
           >
             {visible.map((product) => (
               <div
                 key={product.slug}
                 className="w-[85%] shrink-0 snap-start sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-13.34px)] xl:w-[calc(25%-15px)]"
               >
-                <ProductCard product={product} />
+                <ProductCard product={product} badge={FEATURED_BADGES[product.slug]} />
               </div>
             ))}
           </div>
@@ -83,7 +99,7 @@ export function ProductShowcase() {
               <button
                 type="button"
                 onClick={() => scrollByCard(-1)}
-                className={cn(arrowClass, "left-0 -translate-x-1/2")}
+                className={cn(arrowClass, "left-1 sm:left-0 sm:-translate-x-1/2")}
                 aria-label="Produtos anteriores"
               >
                 <ChevronLeft className="h-4 w-4" />
@@ -91,7 +107,7 @@ export function ProductShowcase() {
               <button
                 type="button"
                 onClick={() => scrollByCard(1)}
-                className={cn(arrowClass, "right-0 translate-x-1/2")}
+                className={cn(arrowClass, "right-1 sm:right-0 sm:translate-x-1/2")}
                 aria-label="Próximos produtos"
               >
                 <ChevronRight className="h-4 w-4" />

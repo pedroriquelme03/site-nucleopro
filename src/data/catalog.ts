@@ -389,3 +389,50 @@ export const catalogProducts: CatalogProduct[] = [
       "De guitarras acústicas a laptops, o melhor som para fontes estéreo como teclados e sintetizadores. Duas entradas de alta impedância de 1/4\" com saídas thru e atenuadores de -15 dB, além de duas saídas XLR de baixa impedância com aterramento.",
   },
 ];
+
+export function catalogProductBySlug(slug: string) {
+  return catalogProducts.find((product) => product.slug === slug);
+}
+
+export function catalogCategoryById(id: CatalogCategoryId) {
+  return catalogCategories.find((category) => category.id === id);
+}
+
+export function productPagePath(slug: string) {
+  return `/produto/${slug}`;
+}
+
+export function productImageSrc(slug: string) {
+  return `/produtos/${slug}.jpg`;
+}
+
+export function normalizeSearch(text: string) {
+  return text
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+}
+
+export function productMatchesQuery(
+  product: CatalogProduct,
+  query: string,
+  scope: "name" | "any" = "name",
+) {
+  const trimmed = query.trim();
+  if (!trimmed) return true;
+  const haystack =
+    scope === "any"
+      ? [product.name, product.tagline, product.description, catalogCategoryById(product.category)?.name]
+          .filter(Boolean)
+          .join(" ")
+      : product.name;
+  const normalized = normalizeSearch(haystack);
+  return trimmed
+    .split(/\s+/)
+    .filter(Boolean)
+    .every((term) => normalized.includes(normalizeSearch(term)));
+}
+
+export function searchCatalog(query: string, scope: "name" | "any" = "name") {
+  return catalogProducts.filter((product) => productMatchesQuery(product, query, scope));
+}

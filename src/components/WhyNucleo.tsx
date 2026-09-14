@@ -1,15 +1,13 @@
 import { motion } from "framer-motion";
-import { BookOpen, Download, Wrench, ShieldCheck, MessageCircle } from "lucide-react";
-import { WHATSAPP_NUMBER, WHATSAPP_URL } from "@/lib/utils";
+import { BookOpen, Download, Wrench, ShieldCheck } from "lucide-react";
+import { WHATSAPP_NUMBER } from "@/lib/utils";
 
 const pillars = [
   {
     icon: BookOpen,
     title: "Manuais",
     desc: "Manuais de operação e especificações Mackie para o seu equipamento.",
-    href: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-      "Olá! Vim pelo site da Núcleo ProAudio e preciso de um manual Mackie.",
-    )}`,
+    href: "/manuais",
   },
   {
     icon: Download,
@@ -59,16 +57,6 @@ export function WhyNucleo() {
           <p className="mt-4 font-display text-xl font-bold text-brand">
             Se é Mackie, passa pela Núcleo.
           </p>
-
-          <a
-            href={WHATSAPP_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="mt-8 inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-white to-white px-4 py-2 text-sm font-semibold text-ink-950 shadow-glow-sm transition-all hover:scale-[1.03] hover:to-[#a97c50] active:scale-95"
-          >
-            <MessageCircle className="h-4 w-4" />
-            Falar com um especialista
-          </a>
         </motion.div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:order-1">
@@ -76,8 +64,8 @@ export function WhyNucleo() {
             <motion.a
               key={p.title}
               href={p.href}
-              target="_blank"
-              rel="noreferrer"
+              target={p.href.startsWith("http") ? "_blank" : undefined}
+              rel={p.href.startsWith("http") ? "noreferrer" : undefined}
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               whileHover={{ y: -6, transition: { type: "spring", stiffness: 300, damping: 22 } }}

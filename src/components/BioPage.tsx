@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, Globe, Instagram, LayoutGrid } from "lucide-react";
 import { INSTAGRAM_URL, WHATSAPP_URL } from "@/lib/utils";
 import { WhatsAppIcon } from "./WhatsAppIcon";
-import { BrandStrip } from "./BrandStrip";
 
 const links = [
   {
@@ -70,7 +69,7 @@ export function BioPage() {
             className="h-10 w-auto object-contain sm:h-11"
           />
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-slate-400">
-            Distribuidora oficial Mackie no Brasil. Equipamentos de áudio high-end com suporte
+            Distribuidora oficial Mackie no Brasil. Equipamentos de áudio profissional com suporte
             especializado.
           </p>
           <p className="mt-3 font-display text-sm font-bold text-brand">
@@ -104,8 +103,6 @@ export function BioPage() {
             </motion.a>
           ))}
         </nav>
-
-        <BrandStrip className="mt-6 overflow-hidden rounded-2xl border border-line" />
 
         <p className="mt-auto pt-12 text-center text-xs text-slate-500">
           Desenvolvido por{" "}

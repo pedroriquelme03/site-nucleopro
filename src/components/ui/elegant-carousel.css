@@ -139,7 +139,7 @@
   height: 100%;
   width: 100%;
   object-fit: cover;
-  animation: carousel-kenburns 6.4s ease-out forwards;
+  animation: carousel-kenburns 3s ease-out forwards;
 }
 
 .carousel-image-overlay {

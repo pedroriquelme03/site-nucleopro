@@ -1,14 +1,11 @@
 import { useEffect } from "react";
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
-import { BrandStrip } from "./components/BrandStrip";
 import { ProductShowcase } from "./components/ProductShowcase";
 import { About } from "./components/About";
 import { FeaturedProduct } from "./components/FeaturedProduct";
-import { ScrollStories } from "./components/ScrollStories";
 import { Projects } from "./components/Projects";
 import { Stats } from "./components/Stats";
-import { BuildSystem } from "./components/BuildSystem";
 import { WhoUses } from "./components/WhoUses";
 import { WhereToBuy } from "./components/WhereToBuy";
 import { WhyNucleo } from "./components/WhyNucleo";
@@ -24,10 +21,13 @@ import { SitemapPage } from "./components/SitemapPage";
 import { PrivacyPage } from "./components/PrivacyPage";
 import { TermsPage } from "./components/TermsPage";
 import { BioPage } from "./components/BioPage";
+import { ProductPage } from "./components/ProductPage";
+import { ManuaisPage } from "./components/ManuaisPage";
+import { BlogPage } from "./components/BlogPage";
 
 function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-ink-950">
+    <div className="min-h-screen bg-ink-950 pb-[env(safe-area-inset-bottom)]">
       <Navbar />
       {children}
       <Footer />
@@ -49,14 +49,11 @@ function HomePage() {
   return (
     <main>
       <Hero />
-      <BrandStrip />
       <ProductShowcase />
       <About />
       <FeaturedProduct />
-      <ScrollStories />
       <Projects />
       <Stats />
-      <BuildSystem />
       <WhoUses />
       <WhereToBuy />
       <WhyNucleo />
@@ -82,6 +79,22 @@ export default function App() {
     return (
       <Layout>
         <CatalogPage />
+      </Layout>
+    );
+  }
+
+  if (path === "/manuais") {
+    return (
+      <Layout>
+        <ManuaisPage />
+      </Layout>
+    );
+  }
+
+  if (path === "/blog") {
+    return (
+      <Layout>
+        <BlogPage />
       </Layout>
     );
   }
@@ -114,6 +127,15 @@ export default function App() {
     return (
       <Layout>
         <TermsPage />
+      </Layout>
+    );
+  }
+
+  const productMatch = path.match(/^\/produto\/([^/]+)$/);
+  if (productMatch) {
+    return (
+      <Layout>
+        <ProductPage slug={decodeURIComponent(productMatch[1])} />
       </Layout>
     );
   }

@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { ShieldCheck, Truck, Wrench } from "lucide-react";
 import { SectionHeading } from "./SectionHeading";
-import { WHATSAPP_URL } from "@/lib/utils";
 
 const pillars = [
   {
@@ -58,14 +57,6 @@ export function SobreNosPage() {
               <p className="mt-8 font-display text-2xl font-bold text-brand">
                 Se é Mackie, passa pela Núcleo.
               </p>
-              <a
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noreferrer"
-                className="mt-8 inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-white to-white px-6 py-3.5 text-sm font-semibold text-ink-950 shadow-glow-sm transition-all hover:scale-[1.03] hover:to-[#a97c50] active:scale-95"
-              >
-                Fale com um especialista
-              </a>
             </motion.div>
 
             <div className="grid gap-4">

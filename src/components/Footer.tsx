@@ -1,16 +1,15 @@
 import { Instagram } from "lucide-react";
 import { Logo } from "./Logo";
 import { WhatsAppIcon } from "./WhatsAppIcon";
-import { categories } from "@/data/products";
+import { catalogCategories } from "@/data/catalog";
 import { INSTAGRAM_URL, WHATSAPP_URL } from "@/lib/utils";
 
 export function Footer() {
   const nav = [
     { label: "Representante comercial", href: "/#contato" },
-    { label: "Projetos", href: "/#projetos" },
+    { label: "Blog", href: "/blog" },
     { label: "Quem somos", href: "/sobre-nos" },
     { label: "Parceiros", href: "/#parceiros" },
-    { label: "Dealers", href: "/#onde-comprar" },
   ];
 
   const legal = [
@@ -71,10 +70,13 @@ export function Footer() {
               Linhas Mackie
             </h4>
             <ul className="mt-4 space-y-2.5">
-              {categories.map((c) => (
+              {catalogCategories.map((c) => (
                 <li key={c.id}>
-                  <a href="/#produtos" className="text-sm text-slate-400 transition-colors hover:text-brand">
-                    {c.name}
+                  <a
+                    href={`/catalogo?categoria=${c.id}`}
+                    className="text-sm text-slate-400 transition-colors hover:text-brand"
+                  >
+                    {c.short}
                   </a>
                 </li>
               ))}
@@ -102,8 +104,6 @@ export function Footer() {
             © {new Date().getFullYear()} Núcleo ProAudio · Distribuidor oficial Mackie no Brasil.
           </p>
           <p className="text-xs text-slate-500">
-            <span className="text-brand">Se é Mackie, passa pela Núcleo.</span>
-            <span className="mx-2 text-line">·</span>
             Desenvolvido por{" "}
             <a
               href="https://qeel.com.br"

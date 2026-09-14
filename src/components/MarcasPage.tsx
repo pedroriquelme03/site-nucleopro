@@ -4,7 +4,6 @@ import { ArrowUpRight } from "lucide-react";
 import { categories, products } from "@/data/products";
 import { ProductGlyph } from "./ProductGlyph";
 import { SectionHeading } from "./SectionHeading";
-import { WHATSAPP_URL } from "@/lib/utils";
 
 export function MarcasPage() {
   useEffect(() => {
@@ -81,17 +80,6 @@ export function MarcasPage() {
                 </motion.a>
               );
             })}
-          </div>
-
-          <div className="mt-12 flex justify-center">
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-white to-white px-6 py-3 text-sm font-semibold text-ink-950 shadow-glow-sm transition-all hover:scale-[1.03] hover:to-[#a97c50] active:scale-95"
-            >
-              Fale com um especialista
-            </a>
           </div>
         </div>
       </section>
