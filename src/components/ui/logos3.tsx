@@ -67,25 +67,33 @@ const Logos3 = ({
                   key={`${logo.id}-${index}`}
                   className="flex basis-1/2 justify-center pl-0 sm:basis-1/3 md:basis-1/4 lg:basis-1/5"
                 >
-                  <div className="mx-8 flex h-16 shrink-0 items-center justify-center">
+                  <div className="mx-3 flex w-full sm:mx-4">
                     {logo.image ? (
-                      <img
-                        src={logo.image}
-                        alt={logo.description}
+                      <div
                         className={cn(
-                          "h-7 w-auto opacity-50 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0",
+                          "flex h-24 w-full items-center justify-center rounded-xl bg-white p-4 shadow-sm ring-1 ring-black/5 transition duration-300 hover:-translate-y-1 hover:shadow-md",
                           logo.className,
                         )}
-                      />
-                    ) : (
-                      <span
-                        className={cn(
-                          "whitespace-nowrap font-display text-lg font-bold tracking-[0.14em] text-white/40 uppercase transition duration-300 hover:text-white/90 sm:text-xl",
-                          logo.className,
-                        )}
+                        title={logo.description}
                       >
-                        {logo.description}
-                      </span>
+                        <img
+                          src={logo.image}
+                          alt={logo.description}
+                          loading="lazy"
+                          className="max-h-full max-w-full object-contain"
+                        />
+                      </div>
+                    ) : (
+                      <div className="flex h-24 w-full items-center justify-center rounded-xl bg-white p-4 shadow-sm ring-1 ring-black/5">
+                        <span
+                          className={cn(
+                            "whitespace-nowrap text-center font-display text-base font-bold tracking-[0.08em] text-ink-900 uppercase",
+                            logo.className,
+                          )}
+                        >
+                          {logo.description}
+                        </span>
+                      </div>
                     )}
                   </div>
                 </CarouselItem>
