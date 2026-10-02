@@ -1,6 +1,6 @@
 // Catálogo Mackie — Núcleo ProAudio
 // Fonte: catálogo oficial em PDF (nome, descrição e imagem por produto).
-// Imagens extraídas do PDF em /public/produtos/<slug>.jpg
+// Imagens oficiais Mackie (brandfolder) em /public/produtos/<slug>.webp
 
 export type CatalogCategoryId =
   | "mixers-digitais"
@@ -403,7 +403,7 @@ export function productPagePath(slug: string) {
 }
 
 export function productImageSrc(slug: string) {
-  return `/produtos/${slug}.jpg`;
+  return `/produtos/${slug}.webp`;
 }
 
 export function normalizeSearch(text: string) {
