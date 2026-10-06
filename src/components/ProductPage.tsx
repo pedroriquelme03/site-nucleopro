@@ -209,14 +209,25 @@ export function ProductPage({ slug }: { slug: string }) {
               videos.length > 0 ? (
                 <div className="grid gap-6 lg:grid-cols-2">
                   {videos.map((video) => (
-                    <div key={video.id} className="overflow-hidden rounded-2xl border border-line bg-black">
+                    <div key={video.src ?? video.id} className="overflow-hidden rounded-2xl border border-line bg-black">
                       <div className="aspect-video">
-                        <iframe
-                          src={`https://www.youtube-nocookie.com/embed/${video.id}`}
-                          title={video.title}
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          className="h-full w-full border-0"
-                        />
+                        {video.src ? (
+                          <video
+                            src={video.src}
+                            title={video.title}
+                            controls
+                            preload="none"
+                            poster={productImageSrc(product.slug)}
+                            className="h-full w-full bg-[#ececec] object-contain"
+                          />
+                        ) : (
+                          <iframe
+                            src={`https://www.youtube-nocookie.com/embed/${video.id}`}
+                            title={video.title}
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            className="h-full w-full border-0"
+                          />
+                        )}
                       </div>
                       <p className="bg-ink-800/80 px-4 py-3 text-sm text-white">{video.title}</p>
                     </div>
