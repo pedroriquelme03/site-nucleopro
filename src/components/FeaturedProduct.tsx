@@ -2,40 +2,36 @@ import ElegantCarousel, { type SlideData } from "@/components/ui/elegant-carouse
 
 const featuredSlides: SlideData[] = [
   {
-    title: "Thump15BST",
+    title: "Thump15v4",
     subtitle: "Caixa ativa 15\" · 1400W",
     description:
-      "Woofer de 15\", driver de compressão e Bluetooth. DSP com voicings para DJ, palco e fala — a caixa Mackie que abre o sistema no Brasil.",
+      "SoundCheck DSP, Bluetooth e app Thump Connect 2. A Thump mais potente da linha, pronta para DJ, banda e eventos.",
     accent: "#a97c50",
-    imageUrl:
-      "https://images.unsplash.com/photo-1507878866276-a947ef722fee?auto=format&fit=crop&w=1600&q=80",
+    imageUrl: "/produtos/thump15v4.webp",
   },
   {
-    title: "SRM210 V-Class",
-    subtitle: "Caixa ativa 10\" · 2000W",
+    title: "SRM215 V-Class",
+    subtitle: "Caixa ativa 15\" · 2000W",
     description:
-      "Processamento Advanced Impulse DSP e cobertura precisa. Referência da linha SRM para palco profissional e igrejas.",
+      "Advanced Impulse DSP, mixer digital de 4 canais e controle pelo app SRM Connect. O topo da linha SRM portátil.",
     accent: "#c9a06e",
-    imageUrl:
-      "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=1600&q=80",
+    imageUrl: "/produtos/srm215v.webp",
   },
   {
     title: "DRM12A",
-    subtitle: "Line array 12\"",
+    subtitle: "Line array 12\" · 2000W",
     description:
-      "Elemento de array da série DRM, com DSP integrado e rigging para montagem vertical em touring e casas de espetáculo.",
+      "Módulo de array da série DRM, com DSP Advanced Impulse, presets e ferragens de fly para touring e casas de show.",
     accent: "#c4956a",
-    imageUrl:
-      "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=1600&q=80",
+    imageUrl: "/produtos/drm12a.webp",
   },
   {
-    title: "Thump18S",
-    subtitle: "Subwoofer ativo 18\"",
+    title: "Thump18Sv4",
+    subtitle: "Subwoofer ativo 18\" · 1400W",
     description:
-      "Grave de impacto para completar o sistema Thump. Filtro passa-alta para as caixas satélite e pressão que o público sente.",
+      "O grave mais profundo da linha Thump v4, com modos de passa-alta para casar com as caixas satélite.",
     accent: "#8d643c",
-    imageUrl:
-      "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=1600&q=80",
+    imageUrl: "/produtos/thump18sv4.webp",
   },
 ];
 

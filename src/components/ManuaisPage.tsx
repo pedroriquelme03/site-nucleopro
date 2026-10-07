@@ -237,7 +237,7 @@ export function ManuaisPage() {
                     name="outroProduto"
                     value={form.outroProduto}
                     onChange={setField("outroProduto")}
-                    placeholder="Ex.: Thump215XT"
+                    placeholder="Ex.: Thump15v4"
                     className={inputCls}
                   />
                 </label>

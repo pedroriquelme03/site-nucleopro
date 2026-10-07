@@ -28,7 +28,7 @@ export function PrivacyPage() {
       <LegalBlock title="2. Quais dados coletamos">
         <p>Podemos tratar, conforme o uso do site:</p>
         <ul className="list-disc space-y-1 pl-5">
-          <li>nome, sobrenome, e-mail, telefone e mensagem enviados no formulário de contato;</li>
+          <li>CNPJ, estado, tipo de revenda, e-mail e WhatsApp enviados no cadastro de parceiro;</li>
           <li>informações que você enviar pelo WhatsApp ao falar com a Núcleo;</li>
           <li>dados técnicos de navegação, como endereço IP, tipo de dispositivo e páginas visitadas.</li>
         </ul>

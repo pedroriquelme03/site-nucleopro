@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, MapPin, Send, Store, User } from "lucide-react";
-import { WHATSAPP_DISPLAY, WHATSAPP_NUMBER, WHATSAPP_URL } from "@/lib/utils";
+import { Mail, MapPin, Send, Store } from "lucide-react";
+import { WHATSAPP_DISPLAY, WHATSAPP_URL } from "@/lib/utils";
 import { WhatsAppIcon } from "./WhatsAppIcon";
 import { cn } from "@/lib/utils";
 
-type Intent = "contato" | "parceiro";
 type StoreType = "fisica" | "online" | "";
 
 const PARTNER_EMAIL = "alexandre.medeiros@nucleoproaudio.com.br";
@@ -64,18 +63,6 @@ const contactCards = [
   },
 ];
 
-const intents: { id: Intent; label: string; hint: string; icon: typeof User }[] = [
-  { id: "contato", label: "Falar com a Núcleo", hint: "Dúvidas, orçamento e suporte", icon: User },
-  { id: "parceiro", label: "Seja uma revenda", hint: "Cadastro de parceiro ou loja", icon: Store },
-];
-
-function intentFromUrl(): Intent {
-  const tipo = new URLSearchParams(window.location.search).get("tipo");
-  const hash = window.location.hash.replace("#", "");
-  if (tipo === "parceiro" || tipo === "lojista" || hash === "parceiros") return "parceiro";
-  return "contato";
-}
-
 function formatCnpj(value: string) {
   const digits = value.replace(/\D/g, "").slice(0, 14);
   return digits
@@ -94,50 +81,23 @@ function formatWhatsapp(value: string) {
 }
 
 export function Contact() {
-  const [intent, setIntent] = useState<Intent>(intentFromUrl);
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState("");
   const [form, setForm] = useState({
-    nome: "",
-    sobrenome: "",
     email: "",
-    telefone: "",
-    mensagem: "",
     cnpj: "",
     estado: "",
     tipo: "" as StoreType,
     whatsapp: "",
   });
 
-  useEffect(() => {
-    const sync = () => setIntent(intentFromUrl());
-    window.addEventListener("hashchange", sync);
-    return () => window.removeEventListener("hashchange", sync);
-  }, []);
-
-  const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
+  const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
     setForm((f) => ({ ...f, [k]: e.target.value }));
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-
-    if (intent === "contato") {
-      const text = [
-        `Olá! Meu nome é ${form.nome} ${form.sobrenome}.`.trim(),
-        form.email && `E-mail: ${form.email}`,
-        form.telefone && `Telefone: ${form.telefone}`,
-        "",
-        form.mensagem,
-      ];
-      window.open(
-        `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text.filter(Boolean).join("\n"))}`,
-        "_blank",
-        "noreferrer",
-      );
-      return;
-    }
 
     if (!form.cnpj.replace(/\D/g, "") || form.cnpj.replace(/\D/g, "").length !== 14) {
       setError("Informe um CNPJ válido.");
@@ -193,8 +153,8 @@ export function Contact() {
             Fale com a Núcleo
           </h2>
           <p className="mt-4 max-w-md text-base leading-relaxed text-slate-400">
-            Tire dúvidas sobre a linha Mackie ou cadastre-se como parceiro e revenda. O formulário
-            muda conforme a sua escolha.
+            Tire dúvidas sobre a linha Mackie pelo WhatsApp ou e-mail. Lojistas e parceiros
+            podem se cadastrar no formulário ao lado.
           </p>
 
           <div className="mt-8 space-y-4">
@@ -238,106 +198,17 @@ export function Contact() {
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
           className="rounded-3xl border border-line bg-ink-800/50 p-6 shadow-card sm:p-8"
         >
-          <div className="grid gap-2 sm:grid-cols-2">
-            {intents.map((item) => {
-              const active = intent === item.id;
-              return (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => {
-                    setIntent(item.id);
-                    setSent(false);
-                    setError("");
-                  }}
-                  aria-pressed={active}
-                  className={cn(
-                    "flex items-center gap-3 rounded-2xl border px-4 py-3 text-left transition-colors",
-                    active
-                      ? "border-brand/50 bg-brand/15"
-                      : "border-line bg-ink-950/40 hover:border-white/20",
-                  )}
-                >
-                  <item.icon
-                    className={cn("h-4 w-4 shrink-0", active ? "text-brand" : "text-slate-500")}
-                  />
-                  <span>
-                    <span className={cn("block text-sm font-semibold", active ? "text-white" : "text-slate-200")}>
-                      {item.label}
-                    </span>
-                    <span className="mt-0.5 block text-xs text-slate-500">{item.hint}</span>
-                  </span>
-                </button>
-              );
-            })}
+          <div className="flex items-center gap-3">
+            <span className="grid h-10 w-10 place-items-center rounded-xl bg-brand/15 text-brand">
+              <Store className="h-4 w-4" />
+            </span>
+            <div>
+              <p className="text-sm font-semibold text-white">Seja uma revenda</p>
+              <p className="text-xs text-slate-500">Cadastro de parceiro ou loja</p>
+            </div>
           </div>
 
-          {intent === "contato" ? (
-            <>
-              <div className="mt-5 grid gap-4 sm:grid-cols-2">
-                <div>
-                  <label className="mb-1.5 block text-xs font-medium text-slate-400">Nome</label>
-                  <input className={inputCls} value={form.nome} onChange={set("nome")} placeholder="Seu nome" />
-                </div>
-                <div>
-                  <label className="mb-1.5 block text-xs font-medium text-slate-400">Sobrenome</label>
-                  <input
-                    className={inputCls}
-                    value={form.sobrenome}
-                    onChange={set("sobrenome")}
-                    placeholder="Seu sobrenome"
-                  />
-                </div>
-              </div>
-              <div className="mt-4 grid gap-4 sm:grid-cols-2">
-                <div>
-                  <label className="mb-1.5 block text-xs font-medium text-slate-400">
-                    E-mail <span className="text-brand">*</span>
-                  </label>
-                  <input
-                    type="email"
-                    required
-                    className={inputCls}
-                    value={form.email}
-                    onChange={set("email")}
-                    placeholder="voce@email.com"
-                  />
-                </div>
-                <div>
-                  <label className="mb-1.5 block text-xs font-medium text-slate-400">Telefone</label>
-                  <input
-                    className={inputCls}
-                    value={form.telefone}
-                    onChange={set("telefone")}
-                    placeholder="(11) 90000-0000"
-                  />
-                </div>
-              </div>
-              <div className="mt-4">
-                <label className="mb-1.5 block text-xs font-medium text-slate-400">
-                  Mensagem <span className="text-brand">*</span>
-                </label>
-                <textarea
-                  required
-                  rows={4}
-                  className={inputCls + " resize-none"}
-                  value={form.mensagem}
-                  onChange={set("mensagem")}
-                  placeholder="Como podemos ajudar?"
-                />
-              </div>
-              <button
-                type="submit"
-                className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-6 py-3.5 text-sm font-semibold text-ink-950 shadow-glow-sm transition-transform hover:scale-[1.01] active:scale-95"
-              >
-                <Send className="h-4 w-4" />
-                Enviar mensagem
-              </button>
-              <p className="mt-3 text-center text-xs text-slate-500">
-                Ao enviar, você será direcionado ao nosso WhatsApp com a mensagem preenchida.
-              </p>
-            </>
-          ) : sent ? (
+          {sent ? (
             <div className="mt-8 rounded-2xl border border-brand/30 bg-ink-950/40 px-5 py-10 text-center">
               <p className="font-display text-xl font-bold text-white">Cadastro enviado</p>
               <p className="mt-2 text-sm text-slate-400">

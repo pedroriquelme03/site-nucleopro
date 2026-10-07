@@ -13,7 +13,7 @@ import PillMorphTabs from "@/components/ui/pill-morph-tabs";
 type Filter = "todos" | CatalogCategoryId;
 
 const FEATURED_BADGES: Record<string, string> = {
-  "thump215xt": "Destaque",
+  "thump15v4": "Destaque",
   "thumpgo": "GO",
   "dlz-creator": "Novo",
   "srm-flex": "PA",

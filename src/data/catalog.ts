@@ -111,78 +111,6 @@ export const catalogProducts: CatalogProduct[] = [
     description:
       "O topo da linha SRM portátil. Amplificador Classe D de 2000W, DSP Advanced Impulse e Intelligent Bass Management, corneta Sym-X com driver de compressão de polímero de 1,4\" e woofer de 15\" de alta saída. Mixer digital de 4 canais com display colorido, Bluetooth e controle sem fio pelo app SRM Connect. RF: 40 Hz – 20 kHz, SPL máximo 136 dB.",
   },
-  {
-    slug: "thrash212",
-    name: "Thrash212",
-    category: "caixas-ativas",
-    tagline: "Caixa ativa de 12\" · 1300W",
-    description:
-      "Amplificador Classe D ultraeficiente de 1300W e driver de compressão de titânio de 1\". Entradas duplas XLR/TRS e saída mix out, woofer de 12\", 4 alças e limitador térmico. RF: 52 Hz – 20 kHz, SPL máximo 125 dB.",
-  },
-  {
-    slug: "thrash215",
-    name: "Thrash215",
-    category: "caixas-ativas",
-    tagline: "Caixa ativa de 15\" · 1300W",
-    description:
-      "Amplificador Classe D ultraeficiente de 1300W e driver de compressão de titânio de 1\". Entradas duplas XLR/TRS e saída mix out, woofer de 15\", 4 alças e limitador térmico. RF: 38 Hz – 20 kHz, SPL máximo 126 dB.",
-  },
-  {
-    slug: "thump212",
-    name: "Thump212",
-    category: "caixas-ativas",
-    tagline: "Caixa ativa de 12\" · 1400W",
-    description:
-      "Leve e compacta, com eliminador de feedback integrado e modo de redução de volume (music ducking). Entradas duplas TRS/XLR e auxiliar estéreo de 3,5 mm, woofer de 12\" e driver de 1\". RF: 47 Hz – 23 kHz, SPL máximo 128 dB.",
-  },
-  {
-    slug: "thump215",
-    name: "Thump215",
-    category: "caixas-ativas",
-    tagline: "Caixa ativa de 15\" · 1400W",
-    description:
-      "A escolha de inúmeros DJs pelo mundo: som comprovado, graves potentes e confiabilidade. Amplificador Classe D de 1400W, woofer de 15\" e driver de 1\", eliminador de feedback e music ducking. RF: 40 Hz – 23 kHz, SPL máximo 129 dB.",
-  },
-  {
-    slug: "thump210xt",
-    name: "Thump210XT",
-    category: "caixas-ativas",
-    tagline: "Caixa ativa de 10\" · 1400W",
-    description:
-      "Compacta e ideal para sistemas portáteis, DJs e bares. Entradas XLR/TRS, auxiliar de 3,5 mm ou Bluetooth, woofer de 10\" e driver de 1\", com eliminador de feedback e music ducking. RF: 52 Hz – 23 kHz, SPL máximo 127 dB.",
-  },
-  {
-    slug: "thump212xt",
-    name: "Thump212XT",
-    category: "caixas-ativas",
-    tagline: "Caixa ativa de 12\" · 1400W · sem fio",
-    description:
-      "Controle sem fio pelo celular com modos de EQ específicos por aplicação (interno/externo). Amplificador Classe D de 1400W construído como um tanque, woofer de 12\" e driver de 1\". RF: 47 Hz – 23 kHz, SPL máximo 128 dB.",
-  },
-  {
-    slug: "thump215xt",
-    name: "Thump215XT",
-    category: "caixas-ativas",
-    tagline: "Caixa ativa de 15\" · 1400W · sem fio",
-    description:
-      "Controle e transmissão sem fio com modos de EQ para ambientes internos e externos. Amplificador Classe D de 1400W, woofer de 15\" e driver de 1\", eliminador de feedback e music ducking. RF: 40 Hz – 23 kHz, SPL máximo 129 dB.",
-  },
-  {
-    slug: "thump115s",
-    name: "Thump115S",
-    category: "caixas-ativas",
-    tagline: "Subwoofer ativo de 15\" · 1400W",
-    description:
-      "Modos de EQ selecionáveis e crossover variável. Entradas estéreo, saídas high-pass e full-range para flexibilidade, alças integradas. Amplificador Classe D de 1400W. RF: 36 Hz – 200 Hz, SPL máximo 131 dB.",
-  },
-  {
-    slug: "thump118s",
-    name: "Thump118S",
-    category: "caixas-ativas",
-    tagline: "Subwoofer ativo de 18\" · 1400W",
-    description:
-      "Modos de EQ selecionáveis e crossover variável. Entradas estéreo, saídas high-pass e full-range, alças integradas. Amplificador Classe D de 1400W. RF: 30 Hz – 200 Hz, SPL máximo 132 dB.",
-  },
   // ---- Line array vertical ----
   {
     slug: "srm-flex",
@@ -298,22 +226,6 @@ export const catalogProducts: CatalogProduct[] = [
     tagline: "Subwoofer de estúdio ativo de 10\"",
     description:
       "120 W de graves puros para mixagens com impacto. Woofer de 10\" em fibra de vidro e aramida, amplificação Classe D, conexões estéreo XLR e TRS, crossover ajustável de 40 Hz a 180 Hz e interruptor de polaridade.",
-  },
-  {
-    slug: "cr3-5bt",
-    name: "CR3.5BT",
-    category: "monitores",
-    tagline: "Monitores de estúdio de 3,5\" com Bluetooth",
-    description:
-      "Mesma versatilidade da linha CR3.5 com conectividade Bluetooth. Controle de tom, 50 W RMS bi-amplificados Classe A/B, entradas TRS/RCA/3,5 mm, saída de fone e tweeter de seda com grade de proteção.",
-  },
-  {
-    slug: "cr4-5",
-    name: "CR4.5",
-    category: "monitores",
-    tagline: "Monitores de estúdio ativos de 4,5\"",
-    description:
-      "Referência criativa para produção em casa. Controle de tom, 50 W RMS bi-amplificados Classe A/B, entradas TRS, RCA e 3,5 mm, saída de fone e woofer trançado de 4,5\". 226 × 155 × 211 mm.",
   },
   // ---- Interfaces de áudio ----
   {
@@ -436,14 +348,6 @@ export const catalogProducts: CatalogProduct[] = [
     tagline: "Mixer compacto de 12 canais com efeitos",
     description:
       "Desempenho high-headroom e baixo ruído com 12 efeitos integrados (reverbs, chorus e delays). 4 entradas mic/linha com filtro passa-alta, 4 canais de linha estéreo, EQ de 3 bandas e phantom power.",
-  },
-  {
-    slug: "onyx8",
-    name: "Onyx8",
-    category: "mixers-analogicos",
-    tagline: "Mixer USB analógico premium de 8 canais",
-    description:
-      "Som clássico e performance moderna com pré-amplificadores Onyx e equalizadores Perkins. Gravação multipista via USB ou cartão SD até 24 bits/96 kHz, efeitos personalizáveis, comando Studio com LCD colorido, Bluetooth e alças QuickGrip.",
   },
   // ---- Consoles digitais ----
   {
