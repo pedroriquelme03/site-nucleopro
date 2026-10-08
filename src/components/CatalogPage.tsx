@@ -102,7 +102,7 @@ export function CatalogPage() {
         <div className="container-x">
           <SectionHeading
             title="Catálogo Mackie"
-            description="A linha Mackie completa distribuída pela Núcleo ProAudio no Brasil — mixers, caixas ativas, monitores, microfones, fones e mais. Consulte disponibilidade e valores pelo WhatsApp."
+            description="A linha Mackie completa distribuída pela Núcleo ProAudio no Brasil — mixers, caixas ativas, monitores, microfones, fones e mais. Consulte disponibilidade pelo WhatsApp."
           />
 
           <div className="relative mt-8 max-w-xl">

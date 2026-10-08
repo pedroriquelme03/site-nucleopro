@@ -72,7 +72,7 @@ export function ProductPage({ slug }: { slug: string }) {
   const manuals = productManuals(product);
   const videos = productVideos(product);
   const quoteUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-    `Olá! Tenho interesse no ${product.name} (Mackie). Poderiam me passar mais informações e valor?`,
+    `Olá! Tenho interesse no ${product.name} (Mackie). Poderiam me passar mais informações?`,
   )}`;
   const related = catalogProducts.filter((item) => item.category === product.category && item.slug !== product.slug).slice(0, 4);
 
@@ -130,7 +130,7 @@ export function ProductPage({ slug }: { slug: string }) {
               className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-5 py-3 text-sm font-semibold text-ink-950 shadow-glow-sm transition-transform hover:scale-[1.02] active:scale-95 sm:w-auto"
             >
               <WhatsAppIcon className="h-4 w-4" />
-              Consultar preço
+              Entre em contato
             </a>
           </div>
         </div>

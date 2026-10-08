@@ -213,7 +213,7 @@ export const catalogProducts: CatalogProduct[] = [
   },
   {
     slug: "mr524",
-    name: "MR524",
+    name: "Mr524",
     category: "monitores",
     tagline: "Monitor de estúdio ativo de 5\"",
     description:

@@ -3,7 +3,7 @@ import { BrazilMap } from "./BrazilMap";
 import { WHATSAPP_NUMBER } from "@/lib/utils";
 
 const dealerUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-  "Olá! Vim pelo site da Núcleo ProAudio e quero encontrar um revendedor perto de mim.",
+  "Olá! Vim pelo site da Núcleo ProAudio e quero falar com o representante da minha região.",
 )}`;
 
 export function WhereToBuy() {
@@ -20,7 +20,7 @@ export function WhereToBuy() {
             Onde comprar
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-slate-400 sm:text-xl">
-            Encontre um revendedor Nucleopro perto de você.
+            Fale com o representante comercial da sua região.
           </p>
           <p className="mt-4 max-w-md text-base leading-relaxed text-slate-500">
             Clique no estado para ver o contato. Depois use o botão para falar no WhatsApp.
@@ -31,7 +31,7 @@ export function WhereToBuy() {
             rel="noreferrer"
             className="mt-8 inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-white to-white px-4 py-2 text-sm font-semibold text-ink-950 shadow-glow-sm transition-all hover:scale-[1.03] hover:to-[#a97c50] active:scale-95"
           >
-            Encontrar um revendedor
+            Falar com a Núcleo
           </a>
         </motion.div>
 

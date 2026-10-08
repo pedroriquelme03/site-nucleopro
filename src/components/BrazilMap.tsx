@@ -36,7 +36,7 @@ const BrazilSvg = memo(function BrazilSvg({
     svg.setAttribute("role", "img");
     svg.setAttribute(
       "aria-label",
-      "Mapa do Brasil — clique em um estado para ver o revendedor",
+      "Mapa do Brasil — clique em um estado para ver o representante comercial",
     );
 
     const paths = host.querySelectorAll<SVGPathElement>("path[id^='BR']");
@@ -147,10 +147,10 @@ export function BrazilMap() {
   }, []);
 
   const active = selected ?? hover;
-  const dealer = active ? dealersByState[active.id] : null;
-  const showButton = Boolean(selected && dealer);
+  const dealers = active ? dealersByState[active.id] ?? [] : [];
+  const showButton = Boolean(selected && dealers.length);
   const width = wrapRef.current?.clientWidth ?? 480;
-  const cardX = active ? Math.min(Math.max(active.x, 124), width - 124) : 0;
+  const cardX = active ? Math.min(Math.max(active.x, 136), width - 136) : 0;
   const cardY = active ? Math.max(active.y, 12) : 0;
 
   return (
@@ -173,28 +173,35 @@ export function BrazilMap() {
       ) : (
         <div className="aspect-[1000/912] w-full animate-pulse rounded-3xl bg-brand/20" />
       )}
-      {active && dealer ? (
+      {active && dealers.length ? (
         <div
-          className={`dealer-card absolute z-20 w-[min(14rem,calc(100%-1.5rem))] -translate-x-1/2 -translate-y-[calc(100%+14px)] rounded-2xl border border-line bg-ink-950/95 p-4 shadow-card backdrop-blur-sm ${
+          className={`dealer-card absolute z-20 w-[min(16.5rem,calc(100%-1.5rem))] -translate-x-1/2 -translate-y-[calc(100%+14px)] rounded-2xl border border-line bg-ink-950/95 p-4 shadow-card backdrop-blur-sm ${
             showButton ? "" : "pointer-events-none"
           }`}
           style={{ left: cardX, top: cardY }}
         >
           <p className="text-[11px] font-semibold uppercase tracking-widest text-brand">{active.name}</p>
-          <p className="mt-1 font-display text-sm font-bold text-white">{dealer.name}</p>
-          <p className="mt-0.5 text-xs text-slate-400">{dealer.city}</p>
-          <p className="mt-2 text-sm font-semibold text-white">{dealer.contact}</p>
-          {showButton ? (
-            <a
-              href={dealer.whatsapp}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-white to-white px-3 py-2 text-xs font-semibold text-ink-950 shadow-glow-sm transition-all hover:to-[#a97c50] active:scale-95"
-            >
-              <WhatsAppIcon className="h-4 w-4" />
-              Falar no WhatsApp
-            </a>
-          ) : (
+          <div className="mt-2 space-y-3">
+            {dealers.map((dealer) => (
+              <div key={`${dealer.name}-${dealer.region}`} className="border-t border-line/70 pt-3 first:border-t-0 first:pt-0">
+                <p className="font-display text-sm font-bold text-white">{dealer.name}</p>
+                <p className="mt-0.5 text-xs text-slate-400">{dealer.region}</p>
+                <p className="mt-1 text-sm font-semibold text-white">{dealer.phone}</p>
+                {showButton ? (
+                  <a
+                    href={dealer.whatsapp}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-white to-white px-3 py-2 text-xs font-semibold text-ink-950 shadow-glow-sm transition-all hover:to-[#a97c50] active:scale-95"
+                  >
+                    <WhatsAppIcon className="h-4 w-4" />
+                    Falar no WhatsApp
+                  </a>
+                ) : null}
+              </div>
+            ))}
+          </div>
+          {showButton ? null : (
             <p className="mt-2 text-[11px] text-slate-500">Clique no estado para ver o contato</p>
           )}
         </div>
