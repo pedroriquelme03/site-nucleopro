@@ -9,4 +9,15 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  // YouTube embeds require a Referer (Error 153 if suppressed)
+  server: {
+    headers: {
+      "Referrer-Policy": "origin",
+    },
+  },
+  preview: {
+    headers: {
+      "Referrer-Policy": "origin",
+    },
+  },
 });

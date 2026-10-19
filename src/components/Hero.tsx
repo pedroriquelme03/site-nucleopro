@@ -3,36 +3,14 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const VIDEOS = [
-  {
-    id: "6tzq0mbnFww",
-    label: "Mackie ThumpSub GO",
-    poster: "/hero/thumpsub-go.webp",
-  },
-  {
-    id: "bzP9--xFRnU",
-    label: "Mackie Thump v4",
-    poster: "/hero/thump-v4.webp",
-  },
-  {
-    id: "oNEWCcsTgIs",
-    label: "Mackie ProFX10 GO",
-    poster: "/hero/profx10-go.webp",
-  },
+  { id: "6tzq0mbnFww", label: "Mackie ThumpSub GO" },
+  { id: "bzP9--xFRnU", label: "Mackie Thump v4" },
+  { id: "oNEWCcsTgIs", label: "Mackie ProFX10 GO" },
 ] as const;
 
-function YouTubeCover({
-  videoId,
-  title,
-  poster,
-  priority = false,
-}: {
-  videoId: string;
-  title: string;
-  poster: string;
-  priority?: boolean;
-}) {
-  const [ready, setReady] = useState(false);
-  const src = new URL(`https://www.youtube-nocookie.com/embed/${videoId}`);
+/** Same embed setup as commit 04a30f0, with referrerPolicy for YouTube Error 153. */
+function YouTubeCover({ videoId, title }: { videoId: string; title: string }) {
+  const src = new URL(`https://www.youtube.com/embed/${videoId}`);
   src.search = new URLSearchParams({
     autoplay: "1",
     mute: "1",
@@ -50,27 +28,14 @@ function YouTubeCover({
 
   return (
     <div className="absolute inset-0 overflow-hidden bg-black" aria-hidden>
-      <img
-        src={poster}
-        alt=""
-        decoding="async"
-        fetchPriority={priority ? "high" : "low"}
-        className={cn(
-          "absolute inset-0 h-full w-full object-cover transition-opacity duration-500",
-          ready ? "opacity-0" : "opacity-100",
-        )}
-      />
       <iframe
         src={src.toString()}
         title={title}
         allow="autoplay; encrypted-media; picture-in-picture"
+        referrerPolicy="origin"
         allowFullScreen={false}
         tabIndex={-1}
-        onLoad={() => setReady(true)}
-        className={cn(
-          "pointer-events-none absolute left-1/2 top-1/2 h-[56.25vw] min-h-[125%] w-[177.78vh] min-w-[125%] -translate-x-1/2 -translate-y-1/2 border-0 transition-opacity duration-500",
-          ready ? "opacity-100" : "opacity-0",
-        )}
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[56.25vw] min-h-[125%] w-[177.78vh] min-w-[125%] -translate-x-1/2 -translate-y-1/2 border-0"
       />
     </div>
   );
@@ -137,14 +102,7 @@ export function Hero() {
               active ? "opacity-100" : "pointer-events-none opacity-0",
             )}
           >
-            {active ? (
-              <YouTubeCover
-                videoId={video.id}
-                title={video.label}
-                poster={video.poster}
-                priority={index === 0}
-              />
-            ) : null}
+            {active ? <YouTubeCover videoId={video.id} title={video.label} /> : null}
           </div>
         );
       })}
