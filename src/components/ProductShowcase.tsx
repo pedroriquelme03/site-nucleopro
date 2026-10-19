@@ -33,13 +33,23 @@ export function ProductShowcase() {
   const sliderRef = useRef<HTMLDivElement>(null);
 
   const visible = useMemo(() => {
-    const list =
-      active === "todos"
-        ? catalogProducts
-        : catalogProducts.filter((p) => p.category === active);
-    return [...list].sort(
-      (a, b) => Number(Boolean(FEATURED_BADGES[b.slug])) - Number(Boolean(FEATURED_BADGES[a.slug])),
-    );
+    const byFeatured = (a: (typeof catalogProducts)[number], b: (typeof catalogProducts)[number]) =>
+      Number(Boolean(FEATURED_BADGES[b.slug])) - Number(Boolean(FEATURED_BADGES[a.slug]));
+
+    if (active !== "todos") {
+      return catalogProducts.filter((p) => p.category === active).sort(byFeatured);
+    }
+
+    const limited: typeof catalogProducts = [];
+    for (const category of catalogCategories) {
+      limited.push(
+        ...catalogProducts
+          .filter((p) => p.category === category.id)
+          .sort(byFeatured)
+          .slice(0, 2),
+      );
+    }
+    return limited;
   }, [active]);
 
   const scrollByCard = (direction: -1 | 1) => {

@@ -8,15 +8,14 @@ import { Projects } from "./components/Projects";
 import { Stats } from "./components/Stats";
 import { WhoUses } from "./components/WhoUses";
 import { WhereToBuy } from "./components/WhereToBuy";
-import { WhyNucleo } from "./components/WhyNucleo";
 import { News } from "./components/News";
 import { PartnerHero } from "./components/PartnerHero";
-import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
 import { FloatingWhatsApp } from "./components/FloatingWhatsApp";
 import { MarcasPage } from "./components/MarcasPage";
 import { CatalogPage } from "./components/CatalogPage";
 import { SobreNosPage } from "./components/SobreNosPage";
+import { SuportePage } from "./components/SuportePage";
 import { SitemapPage } from "./components/SitemapPage";
 import { PrivacyPage } from "./components/PrivacyPage";
 import { TermsPage } from "./components/TermsPage";
@@ -24,6 +23,7 @@ import { BioPage } from "./components/BioPage";
 import { ProductPage } from "./components/ProductPage";
 import { ManuaisPage } from "./components/ManuaisPage";
 import { BlogPage } from "./components/BlogPage";
+import { BlogPostPage } from "./components/BlogPostPage";
 
 function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -56,10 +56,8 @@ function HomePage() {
       <Stats />
       <WhoUses />
       <WhereToBuy />
-      <WhyNucleo />
       <News />
       <PartnerHero />
-      <Contact />
     </main>
   );
 }
@@ -99,10 +97,27 @@ export default function App() {
     );
   }
 
+  const blogPostMatch = path.match(/^\/blog\/([^/]+)$/);
+  if (blogPostMatch) {
+    return (
+      <Layout>
+        <BlogPostPage slug={decodeURIComponent(blogPostMatch[1])} />
+      </Layout>
+    );
+  }
+
   if (path === "/sobre-nos") {
     return (
       <Layout>
         <SobreNosPage />
+      </Layout>
+    );
+  }
+
+  if (path === "/suporte") {
+    return (
+      <Layout>
+        <SuportePage />
       </Layout>
     );
   }

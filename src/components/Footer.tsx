@@ -6,9 +6,10 @@ import { INSTAGRAM_URL, WHATSAPP_URL } from "@/lib/utils";
 
 export function Footer() {
   const nav = [
-    { label: "Representante comercial", href: "/#contato" },
+    { label: "Representante comercial", href: "/#parceiros" },
     { label: "Blog", href: "/blog" },
     { label: "Quem somos", href: "/sobre-nos" },
+    { label: "Suporte", href: "/suporte" },
     { label: "Parceiros", href: "/#parceiros" },
   ];
 

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { ChevronLeft, ChevronRight, Search, X } from "lucide-react";
-import { newsItems } from "@/data/news";
+import { newsItems, newsPagePath } from "@/data/news";
 import { normalizeSearch } from "@/data/catalog";
 import { cn } from "@/lib/utils";
 import { SectionHeading } from "./SectionHeading";
@@ -109,10 +109,8 @@ export function BlogPage() {
                 <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2">
                   {paged.map((item) => (
                     <a
-                      key={item.href}
-                      href={item.href}
-                      target="_blank"
-                      rel="noreferrer"
+                      key={item.slug}
+                      href={newsPagePath(item.slug)}
                       className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-ink-800/40 transition-colors hover:border-brand/40"
                     >
                       <div className="aspect-[16/10] overflow-hidden bg-ink-900">

@@ -7,7 +7,8 @@ interface HeroSectionProps extends React.HTMLAttributes<HTMLElement> {
   title: string;
   subtitle: string;
   primaryButtonText: string;
-  primaryButtonHref: string;
+  primaryButtonHref?: string;
+  onPrimaryClick?: () => void;
   secondaryButtonText: string;
   secondaryButtonHref: string;
   imageUrl: string;
@@ -44,6 +45,7 @@ const HeroSection = React.forwardRef<HTMLElement, HeroSectionProps>(
       subtitle,
       primaryButtonText,
       primaryButtonHref,
+      onPrimaryClick,
       secondaryButtonText,
       secondaryButtonHref,
       imageUrl,
@@ -89,11 +91,21 @@ const HeroSection = React.forwardRef<HTMLElement, HeroSectionProps>(
           </motion.p>
 
           <motion.div className="mt-8 flex w-full max-w-sm flex-col items-stretch gap-3 sm:mt-10 sm:max-w-none sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-4" variants={itemVariants}>
-            <Button asChild size="lg" className="w-full sm:w-auto">
-              <a href={primaryButtonHref} target={primaryButtonHref.startsWith("http") ? "_blank" : undefined} rel={primaryButtonHref.startsWith("http") ? "noreferrer" : undefined}>
+            {onPrimaryClick ? (
+              <Button type="button" size="lg" className="w-full sm:w-auto" onClick={onPrimaryClick}>
                 {primaryButtonText}
-              </a>
-            </Button>
+              </Button>
+            ) : (
+              <Button asChild size="lg" className="w-full sm:w-auto">
+                <a
+                  href={primaryButtonHref}
+                  target={primaryButtonHref?.startsWith("http") ? "_blank" : undefined}
+                  rel={primaryButtonHref?.startsWith("http") ? "noreferrer" : undefined}
+                >
+                  {primaryButtonText}
+                </a>
+              </Button>
+            )}
             <Button asChild variant="outline" size="lg" className="w-full sm:w-auto">
               <a href={secondaryButtonHref}>{secondaryButtonText}</a>
             </Button>

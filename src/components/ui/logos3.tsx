@@ -47,10 +47,10 @@ const Logos3 = ({
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-400">{description}</p>
         ) : null}
       </div>
-      <div className="w-full max-w-[100vw] overflow-hidden pt-10 md:pt-14">
-        <div className="relative mx-auto w-full max-w-full overflow-hidden lg:max-w-5xl">
+      <div className="w-full max-w-[100vw] overflow-x-hidden pt-10 md:pt-14">
+        <div className="relative mx-auto w-full max-w-full overflow-x-hidden py-2 lg:max-w-5xl">
           <Carousel
-            className="w-full min-w-0 overflow-hidden"
+            className="w-full min-w-0"
             opts={{ loop: true }}
             plugins={[
               AutoScroll({
@@ -61,13 +61,13 @@ const Logos3 = ({
               }),
             ]}
           >
-            <CarouselContent className="ml-0">
+            <CarouselContent className="ml-0" wrapperClassName="py-2">
               {track.map((logo, index) => (
                 <CarouselItem
                   key={`${logo.id}-${index}`}
                   className="flex basis-1/2 justify-center pl-0 sm:basis-1/3 md:basis-1/4 lg:basis-1/5"
                 >
-                  <div className="mx-3 flex w-full sm:mx-4">
+                  <div className="mx-3 flex w-full py-1 sm:mx-4">
                     {logo.image ? (
                       <div
                         className={cn(

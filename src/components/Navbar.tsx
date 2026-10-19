@@ -9,7 +9,6 @@ const links = [
   { label: "Marcas", href: "/marcas" },
   { label: "Onde comprar", href: "/#onde-comprar" },
   { label: "Notícias", href: "/#noticias" },
-  { label: "Assistência técnica", href: "/#sobre" },
 ];
 
 function catalogSearchUrl(query: string) {
@@ -23,7 +22,6 @@ export function Navbar() {
   const path = window.location.pathname.replace(/\/$/, "") || "/";
   const onMarcas = path === "/marcas";
   const onCatalogo = path === "/catalogo" || path.startsWith("/produto/");
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -32,13 +30,6 @@ export function Navbar() {
   const searchButtonRef = useRef<HTMLButtonElement>(null);
 
   const results = useMemo(() => (query.trim() ? searchCatalog(query, "any").slice(0, 6) : []), [query]);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -77,12 +68,7 @@ export function Navbar() {
   }
 
   return (
-    <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-all duration-300",
-        scrolled ? "glass border-b border-line" : "bg-transparent",
-      )}
-    >
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-line glass">
       <nav className="container-x flex h-16 items-center justify-between">
         <a href="/" className="shrink-0" aria-label="Núcleo ProAudio — início">
           <Logo />

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { newsItems } from "@/data/news";
+import { newsItems, newsPagePath } from "@/data/news";
 import { SectionHeading } from "./SectionHeading";
 
 const arrowClass =
@@ -83,10 +83,8 @@ export function News() {
           >
             {newsItems.map((item) => (
               <a
-                key={item.href}
-                href={item.href}
-                target="_blank"
-                rel="noreferrer"
+                key={item.slug}
+                href={newsPagePath(item.slug)}
                 className="group w-[85%] shrink-0 snap-start overflow-hidden rounded-2xl border border-line bg-ink-800/40 transition-colors hover:border-brand/40 md:w-[calc((100%-40px)/3)]"
               >
                 <div className="aspect-[16/10] overflow-hidden bg-ink-900">
@@ -134,7 +132,7 @@ export function News() {
           <div className="mt-8 flex justify-center gap-2">
             {newsItems.map((item, index) => (
               <button
-                key={item.href}
+                key={item.slug}
                 type="button"
                 className={`h-2 w-2 rounded-full transition-colors ${
                   current === index ? "bg-brand" : "bg-brand/20"

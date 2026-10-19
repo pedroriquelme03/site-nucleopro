@@ -8,6 +8,7 @@ const pages = [
   { label: "Blog", href: "/blog" },
   { label: "Marcas", href: "/marcas" },
   { label: "Sobre nós", href: "/sobre-nos" },
+  { label: "Suporte", href: "/suporte" },
   { label: "Política de privacidade", href: "/politica-de-privacidade" },
   { label: "Termos de uso", href: "/termos-de-uso" },
 ];
@@ -17,10 +18,8 @@ const sections = [
   { label: "Categorias", href: "/#categorias" },
   { label: "Lojas parceiras", href: "/#quem-usa" },
   { label: "Onde comprar", href: "/#onde-comprar" },
-  { label: "Suporte", href: "/#sobre" },
   { label: "Notícias", href: "/#noticias" },
   { label: "Parceiros", href: "/#parceiros" },
-  { label: "Contato", href: "/#contato" },
 ];
 
 function LinkList({ items }: { items: { label: string; href: string }[] }) {

@@ -33,9 +33,11 @@ export function MarcasPage() {
             <div className="relative flex min-h-[240px] flex-1 items-center justify-center bg-gradient-to-br from-ink-700 to-ink-950 p-10 lg:min-h-[320px]">
               <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-brand/15 blur-3xl" />
               <div className="absolute inset-0 bg-grid-fade [background-size:22px_22px] opacity-30" />
-              <p className="relative font-display text-5xl font-extrabold tracking-tight text-white sm:text-6xl lg:text-7xl">
-                MACKIE
-              </p>
+              <img
+                src="/parceiros/mackie.webp"
+                alt="Mackie"
+                className="relative h-16 w-auto object-contain sm:h-20 lg:h-24"
+              />
             </div>
             <div className="flex flex-1 flex-col justify-center p-8 md:p-10">
               <p className="text-xs font-semibold uppercase tracking-widest text-brand">

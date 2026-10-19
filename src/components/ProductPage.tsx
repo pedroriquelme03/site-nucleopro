@@ -103,12 +103,14 @@ export function ProductPage({ slug }: { slug: string }) {
 
       <section className="border-b border-line py-12 sm:py-16">
         <div className="container-x grid items-start gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-16">
-          <div className="overflow-hidden rounded-3xl border border-line bg-[#ececec]">
-            <img
-              src={productImageSrc(product.slug)}
-              alt={`Mackie ${product.name}`}
-              className="h-auto w-full max-w-lg object-contain p-5 sm:p-12"
-            />
+          <div className="mx-auto w-full max-w-lg overflow-hidden rounded-3xl border border-line bg-[#ececec] lg:mx-0">
+            <div className="aspect-square">
+              <img
+                src={productImageSrc(product.slug)}
+                alt={`Mackie ${product.name}`}
+                className="h-full w-full object-contain p-6 sm:p-10"
+              />
+            </div>
           </div>
 
           <div>
@@ -179,9 +181,13 @@ export function ProductPage({ slug }: { slug: string }) {
                     key={src}
                     type="button"
                     onClick={() => setLightbox(src)}
-                    className="overflow-hidden rounded-2xl border border-line bg-[#ececec]"
+                    className="aspect-square overflow-hidden rounded-2xl border border-line bg-[#ececec]"
                   >
-                    <img src={src} alt={`Mackie ${product.name}`} className="h-64 w-full object-contain p-6" />
+                    <img
+                      src={src}
+                      alt={`Mackie ${product.name}`}
+                      className="h-full w-full object-contain p-6"
+                    />
                   </button>
                 ))}
               </div>
@@ -251,11 +257,11 @@ export function ProductPage({ slug }: { slug: string }) {
                     href={productPagePath(item.slug)}
                     className="overflow-hidden rounded-2xl border border-line bg-ink-800/40 transition-colors hover:border-brand/40"
                   >
-                    <div className="bg-[#ececec]">
+                    <div className="aspect-square bg-[#ececec]">
                       <img
                         src={productImageSrc(item.slug)}
                         alt={`Mackie ${item.name}`}
-                        className="h-36 w-full object-contain p-4"
+                        className="h-full w-full object-contain p-4"
                       />
                     </div>
                     <div className="p-4">
