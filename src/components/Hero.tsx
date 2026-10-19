@@ -7,16 +7,21 @@ const VIDEOS = HERO_VIDEOS;
 
 function LocalVideoCover({
   src,
+  poster,
   title,
   active,
+  priority,
   onEnded,
 }: {
   src: string;
+  poster: string;
   title: string;
   active: boolean;
+  priority?: boolean;
   onEnded: () => void;
 }) {
   const ref = useRef<HTMLVideoElement>(null);
+  const [ready, setReady] = useState(false);
 
   const tryPlay = () => {
     const video = ref.current;
@@ -32,7 +37,8 @@ function LocalVideoCover({
 
     if (active) {
       video.currentTime = 0;
-      tryPlay();
+      setReady(video.readyState >= 2);
+      if (video.readyState >= 2) tryPlay();
     } else {
       video.pause();
     }
@@ -40,19 +46,39 @@ function LocalVideoCover({
 
   return (
     <div className="absolute inset-0 overflow-hidden bg-black" aria-hidden>
+      <img
+        src={poster}
+        alt=""
+        decoding="async"
+        fetchPriority={priority ? "high" : "low"}
+        className={cn(
+          "absolute inset-0 h-full w-full object-cover transition-opacity duration-500",
+          ready && active ? "opacity-0" : "opacity-100",
+        )}
+      />
       <video
         ref={ref}
         src={src}
+        poster={poster}
         title={title}
         muted
-        autoPlay
         playsInline
-        preload="auto"
+        preload={priority || active ? "auto" : "metadata"}
         tabIndex={-1}
-        onLoadedData={tryPlay}
-        onCanPlay={tryPlay}
+        onLoadedData={() => {
+          setReady(true);
+          tryPlay();
+        }}
+        onCanPlay={() => {
+          setReady(true);
+          tryPlay();
+        }}
+        onPlaying={() => setReady(true)}
         onEnded={onEnded}
-        className="pointer-events-none absolute left-1/2 top-1/2 h-[56.25vw] min-h-[125%] w-[177.78vh] min-w-[125%] -translate-x-1/2 -translate-y-1/2 object-cover"
+        className={cn(
+          "pointer-events-none absolute left-1/2 top-1/2 h-[56.25vw] min-h-[125%] w-[177.78vh] min-w-[125%] -translate-x-1/2 -translate-y-1/2 object-cover transition-opacity duration-500",
+          ready && active ? "opacity-100" : "opacity-0",
+        )}
       />
     </div>
   );
@@ -66,6 +92,19 @@ export function Hero() {
   const go = (direction: -1 | 1) => {
     setSlide((current) => (current + direction + VIDEOS.length) % VIDEOS.length);
   };
+
+  useEffect(() => {
+    // Prefetch the next slide video while the current one plays
+    const next = VIDEOS[(slide + 1) % VIDEOS.length];
+    const link = document.createElement("link");
+    link.rel = "prefetch";
+    link.as = "video";
+    link.href = next.src;
+    document.head.appendChild(link);
+    return () => {
+      link.remove();
+    };
+  }, [slide]);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -116,11 +155,13 @@ export function Hero() {
               active ? "opacity-100" : "pointer-events-none opacity-0",
             )}
           >
-            {active ? (
+            {active || index === (slide + 1) % VIDEOS.length ? (
               <LocalVideoCover
                 src={video.src}
+                poster={video.poster}
                 title={video.label}
                 active={active}
+                priority={index === 0}
                 onEnded={() => {
                   if (paused || hidden) return;
                   go(1);

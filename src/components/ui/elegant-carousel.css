@@ -33,6 +33,15 @@
   max-width: 34rem;
 }
 
+.carousel-heading {
+  margin-bottom: 0.75rem;
+  font-family: Sora, Inter, sans-serif;
+  font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
 .carousel-title,
 .carousel-subtitle,
 .carousel-description {
@@ -111,15 +120,21 @@
 
 .carousel-image-container {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   min-height: 420px;
   padding: 1.75rem 1.75rem 1.75rem 0;
 }
 
 .carousel-image-frame {
   position: relative;
-  height: 100%;
+  width: min(100%, 28rem);
+  aspect-ratio: 1 / 1;
   overflow: hidden;
-  border-radius: 0.35rem;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #ececec;
   transition:
     opacity 0.4s ease,
     transform 0.4s ease;
@@ -127,7 +142,7 @@
 
 .carousel-image-frame.transitioning {
   opacity: 0;
-  transform: scale(1.04);
+  transform: scale(0.98);
 }
 
 .carousel-image-frame.visible {
@@ -138,8 +153,9 @@
 .carousel-image {
   height: 100%;
   width: 100%;
-  object-fit: cover;
-  animation: carousel-kenburns 3s ease-out forwards;
+  object-fit: contain;
+  object-position: center;
+  padding: 1.5rem;
 }
 
 .carousel-image-overlay {
@@ -196,15 +212,6 @@
   color: #fff;
 }
 
-@keyframes carousel-kenburns {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(1.08);
-  }
-}
-
 @media (max-width: 900px) {
   .carousel-inner {
     min-height: 0;
@@ -213,8 +220,16 @@
 
   .carousel-image-container {
     order: -1;
-    min-height: 52vw;
-    padding: 1rem 1rem 0;
+    min-height: 0;
+    padding: 1.25rem 1.25rem 0;
+  }
+
+  .carousel-image-frame {
+    width: min(100%, 22rem);
+  }
+
+  .carousel-image {
+    padding: 1rem;
   }
 
   .carousel-content {
@@ -231,8 +246,3 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .carousel-image {
-    animation: none;
-  }
-}

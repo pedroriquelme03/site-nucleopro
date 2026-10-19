@@ -54,8 +54,10 @@ const TRANSITION_DURATION = 800;
 
 export default function ElegantCarousel({
   slides = defaultSlides,
+  heading,
 }: {
   slides?: SlideData[];
+  heading?: string;
 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -147,6 +149,9 @@ export default function ElegantCarousel({
       <div className="carousel-inner">
         <div className="carousel-content">
           <div className="carousel-content-inner">
+            {heading ? (
+              <p className="carousel-heading text-gradient">{heading}</p>
+            ) : null}
             <h2 className={`carousel-title ${isTransitioning ? "transitioning" : "visible"}`}>
               {currentSlide.title}
             </h2>
@@ -194,12 +199,6 @@ export default function ElegantCarousel({
               src={currentSlide.imageUrl}
               alt={currentSlide.title}
               className="carousel-image"
-            />
-            <div
-              className="carousel-image-overlay"
-              style={{
-                background: `linear-gradient(135deg, ${currentSlide.accent}22 0%, transparent 50%)`,
-              }}
             />
           </div>
         </div>

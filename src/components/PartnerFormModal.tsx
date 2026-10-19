@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Send, Store, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-type StoreType = "fisica" | "online" | "";
+type StoreType = "fisica" | "online" | "ambos" | "";
 
 const PARTNER_EMAIL = "alexandre.medeiros@nucleoproaudio.com.br";
 
@@ -102,7 +102,8 @@ export function PartnerFormModal({
       return;
     }
 
-    const tipoLabel = form.tipo === "fisica" ? "Revenda física" : "Revenda online";
+    const tipoLabel =
+      form.tipo === "fisica" ? "Revenda física" : form.tipo === "online" ? "Revenda online" : "Ambos";
     const estadoLabel = UFS.find((item) => item.uf === form.estado);
     const data = new FormData();
     data.append("cnpj", form.cnpj);
@@ -236,11 +237,12 @@ export function PartnerFormModal({
                   <p className="mb-1.5 text-xs font-medium text-slate-400">
                     Tipo de revenda <span className="text-brand">*</span>
                   </p>
-                  <div className="grid gap-2 sm:grid-cols-2">
+                  <div className="grid gap-2 sm:grid-cols-3">
                     {(
                       [
                         { id: "fisica", label: "Revenda física" },
                         { id: "online", label: "Revenda online" },
+                        { id: "ambos", label: "Ambos" },
                       ] as const
                     ).map((item) => {
                       const active = form.tipo === item.id;

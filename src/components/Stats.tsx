@@ -9,7 +9,7 @@ interface Stat {
 }
 
 const stats: Stat[] = [
-  { value: 50, prefix: "+de ", label: "produtos" },
+  { value: 50, prefix: "+de ", label: "Produtos" },
   { value: 100, suffix: "%", label: "Distribuidor oficial" },
   { value: 27, suffix: " estados", label: "Entrega nacional" },
   { value: 1, prefix: "#", label: "Se é Mackie, é Núcleo" },
