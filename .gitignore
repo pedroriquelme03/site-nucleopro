@@ -9,3 +9,6 @@ dist-ssr
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Hero banner videos (hosted externally — see src/data/hero-videos.ts)
+public/hero/*.mp4

@@ -1,47 +1,62 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import { HERO_VIDEOS } from "@/data/hero-videos";
 import { cn } from "@/lib/utils";
 
-const VIDEOS = [
-  { id: "6tzq0mbnFww", label: "Mackie ThumpSub GO" },
-  { id: "bzP9--xFRnU", label: "Mackie Thump v4" },
-  { id: "oNEWCcsTgIs", label: "Mackie ProFX10 GO" },
-] as const;
+const VIDEOS = HERO_VIDEOS;
 
-/** Same embed setup as commit 04a30f0, with referrerPolicy for YouTube Error 153. */
-function YouTubeCover({ videoId, title }: { videoId: string; title: string }) {
-  const src = new URL(`https://www.youtube.com/embed/${videoId}`);
-  src.search = new URLSearchParams({
-    autoplay: "1",
-    mute: "1",
-    loop: "1",
-    playlist: videoId,
-    controls: "0",
-    rel: "0",
-    modestbranding: "1",
-    playsinline: "1",
-    iv_load_policy: "3",
-    disablekb: "1",
-    fs: "0",
-    cc_load_policy: "0",
-  }).toString();
+function LocalVideoCover({
+  src,
+  title,
+  active,
+  onEnded,
+}: {
+  src: string;
+  title: string;
+  active: boolean;
+  onEnded: () => void;
+}) {
+  const ref = useRef<HTMLVideoElement>(null);
+
+  const tryPlay = () => {
+    const video = ref.current;
+    if (!video || !active) return;
+    video.muted = true;
+    const play = video.play();
+    if (play && typeof play.catch === "function") play.catch(() => undefined);
+  };
+
+  useEffect(() => {
+    const video = ref.current;
+    if (!video) return;
+
+    if (active) {
+      video.currentTime = 0;
+      tryPlay();
+    } else {
+      video.pause();
+    }
+  }, [active]);
 
   return (
     <div className="absolute inset-0 overflow-hidden bg-black" aria-hidden>
-      <iframe
-        src={src.toString()}
+      <video
+        ref={ref}
+        src={src}
         title={title}
-        allow="autoplay; encrypted-media; picture-in-picture"
-        referrerPolicy="origin"
-        allowFullScreen={false}
+        muted
+        autoPlay
+        playsInline
+        preload="auto"
         tabIndex={-1}
-        className="pointer-events-none absolute left-1/2 top-1/2 h-[56.25vw] min-h-[125%] w-[177.78vh] min-w-[125%] -translate-x-1/2 -translate-y-1/2 border-0"
+        onLoadedData={tryPlay}
+        onCanPlay={tryPlay}
+        onEnded={onEnded}
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[56.25vw] min-h-[125%] w-[177.78vh] min-w-[125%] -translate-x-1/2 -translate-y-1/2 object-cover"
       />
     </div>
   );
 }
-
-const SLIDE_MS = 12_000;
 
 export function Hero() {
   const [slide, setSlide] = useState(0);
@@ -76,17 +91,16 @@ export function Hero() {
   }, []);
 
   useEffect(() => {
-    const reduced =
-      typeof window.matchMedia === "function" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (paused || hidden || reduced) return;
-
-    const id = window.setInterval(() => {
-      setSlide((current) => (current + 1) % VIDEOS.length);
-    }, SLIDE_MS);
-
-    return () => window.clearInterval(id);
-  }, [slide, paused, hidden]);
+    const video = document.querySelector<HTMLVideoElement>("#top video");
+    if (!video) return;
+    if (paused || hidden) {
+      video.pause();
+      return;
+    }
+    video.muted = true;
+    const play = video.play();
+    if (play && typeof play.catch === "function") play.catch(() => undefined);
+  }, [paused, hidden, slide]);
 
   return (
     <section id="top" className="relative mt-16 h-[calc(100svh-4rem)] w-full overflow-hidden bg-black">
@@ -102,7 +116,17 @@ export function Hero() {
               active ? "opacity-100" : "pointer-events-none opacity-0",
             )}
           >
-            {active ? <YouTubeCover videoId={video.id} title={video.label} /> : null}
+            {active ? (
+              <LocalVideoCover
+                src={video.src}
+                title={video.label}
+                active={active}
+                onEnded={() => {
+                  if (paused || hidden) return;
+                  go(1);
+                }}
+              />
+            ) : null}
           </div>
         );
       })}
