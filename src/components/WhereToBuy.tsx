@@ -20,10 +20,10 @@ export function WhereToBuy() {
             Onde comprar
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-slate-400 sm:text-xl">
-            Fale com o representante comercial da sua região.
+            Encontre uma loja parceira Mackie na sua região.
           </p>
           <p className="mt-4 max-w-md text-base leading-relaxed text-slate-500">
-            Clique no estado para ver o contato. Depois use o botão para falar no WhatsApp.
+            Clique no estado para ver as lojas. Depois use o botão para falar no WhatsApp.
           </p>
           <a
             href={dealerUrl}

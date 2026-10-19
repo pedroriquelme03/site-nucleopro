@@ -36,7 +36,7 @@ const BrazilSvg = memo(function BrazilSvg({
     svg.setAttribute("role", "img");
     svg.setAttribute(
       "aria-label",
-      "Mapa do Brasil — clique em um estado para ver o representante comercial",
+      "Mapa do Brasil — clique em um estado para ver as lojas parceiras",
     );
 
     const paths = host.querySelectorAll<SVGPathElement>("path[id^='BR']");
@@ -148,7 +148,7 @@ export function BrazilMap() {
 
   const active = selected ?? hover;
   const dealers = active ? dealersByState[active.id] ?? [] : [];
-  const showButton = Boolean(selected && dealers.length);
+  const showPanel = Boolean(selected && dealers.length);
   const width = wrapRef.current?.clientWidth ?? 480;
   const cardX = active ? Math.min(Math.max(active.x, 136), width - 136) : 0;
   const cardY = active ? Math.max(active.y, 12) : 0;
@@ -175,8 +175,8 @@ export function BrazilMap() {
       )}
       {active && dealers.length ? (
         <div
-          className={`dealer-card absolute z-20 w-[min(16.5rem,calc(100%-1.5rem))] -translate-x-1/2 -translate-y-[calc(100%+14px)] rounded-2xl border border-line bg-ink-950/95 p-4 shadow-card backdrop-blur-sm ${
-            showButton ? "" : "pointer-events-none"
+          className={`dealer-card absolute z-20 max-h-[min(22rem,50vh)] w-[min(16.5rem,calc(100%-1.5rem))] -translate-x-1/2 -translate-y-[calc(100%+14px)] overflow-y-auto rounded-2xl border border-line bg-ink-950/95 p-4 shadow-card backdrop-blur-sm ${
+            showPanel ? "" : "pointer-events-none"
           }`}
           style={{ left: cardX, top: cardY }}
         >
@@ -186,8 +186,10 @@ export function BrazilMap() {
               <div key={`${dealer.name}-${dealer.region}`} className="border-t border-line/70 pt-3 first:border-t-0 first:pt-0">
                 <p className="font-display text-sm font-bold text-white">{dealer.name}</p>
                 <p className="mt-0.5 text-xs text-slate-400">{dealer.region}</p>
-                <p className="mt-1 text-sm font-semibold text-white">{dealer.phone}</p>
-                {showButton ? (
+                {dealer.phone && dealer.phone !== "—" ? (
+                  <p className="mt-1 text-sm font-semibold text-white">{dealer.phone}</p>
+                ) : null}
+                {showPanel && dealer.whatsapp ? (
                   <a
                     href={dealer.whatsapp}
                     target="_blank"
@@ -201,7 +203,7 @@ export function BrazilMap() {
               </div>
             ))}
           </div>
-          {showButton ? null : (
+          {showPanel ? null : (
             <p className="mt-2 text-[11px] text-slate-500">Clique no estado para ver o contato</p>
           )}
         </div>

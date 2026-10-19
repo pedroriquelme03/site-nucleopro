@@ -1,5 +1,3 @@
-import { WHATSAPP_DISPLAY, WHATSAPP_URL } from "@/lib/utils";
-
 export interface Representative {
   name: string;
   region: string;
@@ -8,84 +6,457 @@ export interface Representative {
   whatsapp: string;
 }
 
-function whatsappDigits(raw: string) {
-  let digits = raw.replace(/\D/g, "");
-  if (digits.length === 10 && /[6-9]/.test(digits[2] ?? "")) {
-    digits = `${digits.slice(0, 2)}9${digits.slice(2)}`;
-  }
-  return `55${digits}`;
-}
-
-function formatPhone(raw: string) {
-  let digits = raw.replace(/\D/g, "");
-  if (digits.length === 10 && /[6-9]/.test(digits[2] ?? "")) {
-    digits = `${digits.slice(0, 2)}9${digits.slice(2)}`;
-  }
-  return digits.replace(/^(\d{2})(\d{5})(\d{4})$/, "($1) $2-$3");
-}
-
-function representative(name: string, region: string, phone: string, email: string): Representative {
-  const firstName = name.split(" ")[0];
-  return {
-    name,
-    region,
-    phone: formatPhone(phone),
-    email,
-    whatsapp: `https://wa.me/${whatsappDigits(phone)}?text=${encodeURIComponent(
-      `Olá, ${firstName}! Vim pelo site da Núcleo ProAudio e gostaria de falar sobre representação comercial.`,
-    )}`,
-  };
-}
-
-const joiner = representative("Joiner Torrano", "RS e SC", "51 9692-0980", "joiner@torranorep.com.br");
-const rodrigo = representative("Rodrigo New Aba", "DF, TO e GO", "62 8223-0267", "newabarep@gmail.com");
-const felipeMaria = representative("Felipe Maria", "Rio de Janeiro", "21 99795-6323", "felipedemaria@gmail.com");
-const marcos = representative("Marcos Motta", "BA e SE", "71 8845-4765", "mota1996@terra.com.br");
-const ricardo = representative("Ricardo Marinelli", "São Paulo — Interior", "16 98124-0597", "ricardomarinelli@icloud.com");
-const moacyr = representative("Moacyr Aguiar", "Ceará", "85 9171-5055", "jmr.aguia@jmraguiar.com.br");
-const ronan = representative("Ronan", "Espírito Santo", "27 99316-5994", "ronanbruck@hotmail.com");
-const luiz = representative("Luiz Zen", "Paraná", "41 9981-6764", "luizfzen@aol.com");
-const dinho = representative("Dinho Mourão", "Minas Gerais", "31 8899-7387", "dinhomourao@gmail.com");
-const andre = representative("André Angelo", "AL, PE, PB e RN", "81 9974-3835", "andreangelosofia@gmail.com");
-const joaoPedro = representative("João Pedro", "São Paulo — Capital", "11 95196-2107", "jp_representacao@yahoo.com");
-const beto = representative("Beto Teixeira", "AP e PA", "91 8319-7279", "betoteixeirajr@hotmail.com");
-const franklin = representative("Franklin", "MA e PI", "98 8402-9150", "ffrepresentacoes2010@gmail.com");
-const felipeMedeiros = representative("Felipe Medeiros", "AC e RO", "69 9244-3360", "willian.felipe@migorepresentacoes.com");
-
-const nucleo: Representative = {
-  name: "Núcleo ProAudio",
-  region: "Atendimento nacional",
-  phone: WHATSAPP_DISPLAY,
-  email: "contato@nucleoproaudio.com.br",
-  whatsapp: WHATSAPP_URL,
-};
-
+/** Lojas / clientes da planilha — mapa “Onde comprar”. */
 export const dealersByState: Record<string, Representative[]> = {
-  BRAC: [felipeMedeiros],
-  BRAL: [andre],
-  BRAM: [nucleo],
-  BRAP: [beto],
-  BRBA: [marcos],
-  BRCE: [moacyr],
-  BRDF: [rodrigo],
-  BRES: [ronan],
-  BRGO: [rodrigo],
-  BRMA: [franklin],
-  BRMG: [dinho],
-  BRMS: [nucleo],
-  BRMT: [nucleo],
-  BRPA: [beto],
-  BRPB: [andre],
-  BRPE: [andre],
-  BRPI: [franklin],
-  BRPR: [luiz],
-  BRRJ: [felipeMaria],
-  BRRN: [andre],
-  BRRO: [felipeMedeiros],
-  BRRR: [nucleo],
-  BRRS: [joiner],
-  BRSC: [joiner],
-  BRSE: [marcos],
-  BRSP: [joaoPedro, ricardo],
-  BRTO: [rodrigo],
+  BRAL: [
+    {
+      name: "M A G ALMEIDA (ELETROSOM MUSICAL)",
+      region: "Maceió — AL",
+      phone: "(82) 3326-1874",
+      email: "eletrosom.musical@hotmail.com",
+      whatsapp: "https://wa.me/558233261874?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20M%20A%20G%20ALMEIDA%20(ELETROSOM%20MUSICAL).",
+    },
+  ],
+  BRBA: [
+    {
+      name: "L S P Ltda",
+      region: "Itamaraju — BA",
+      phone: "(73) 99913-8081",
+      email: "pedro_moitinhoba@hotmail.com",
+      whatsapp: "https://wa.me/5573999138081?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20L%20S%20P%20Ltda.",
+    },
+    {
+      name: "FOX SOM",
+      region: "Porto Seguro — BA",
+      phone: "(73) 3281-3971",
+      email: "foxsom@live.com",
+      whatsapp: "https://wa.me/557332813971?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20FOX%20SOM.",
+    },
+    {
+      name: "DAQUIEXPRESS COMÉRCIO E IMPORTAÇÃO LTDA",
+      region: "Salvador — BA",
+      phone: "(71) 99996-1773",
+      email: "contato@daquiexpress.com",
+      whatsapp: "https://wa.me/5571999961773?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20DAQUIEXPRESS%20COM%C3%89RCIO%20E%20IMPORTA%C3%87%C3%83O%20LTDA.",
+    },
+  ],
+  BRDF: [
+    {
+      name: "Mega Music Comercio Varejista de Instrumentos Musicais",
+      region: "Brasília — DF",
+      phone: "(61) 99222-3922",
+      email: "magazinemegamusic@gmail.com",
+      whatsapp: "https://wa.me/5561992223922?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20Mega%20Music%20Comercio%20Varejista%20de%20Instrumentos%20Musicais.",
+    },
+    {
+      name: "Sinfonia Instrumentos Musicais Ltda",
+      region: "Brasília — DF",
+      phone: "(61) 3385-6462",
+      email: "sinfonia.10@gmail.com",
+      whatsapp: "https://wa.me/556133856462?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20Sinfonia%20Instrumentos%20Musicais%20Ltda.",
+    },
+  ],
+  BRES: [
+    {
+      name: "Save Som Ltda",
+      region: "Aracruz — ES",
+      phone: "(27) 3296-3618",
+      email: "financeiro@savesom.com.br",
+      whatsapp: "https://wa.me/552732963618?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20Save%20Som%20Ltda.",
+    },
+    {
+      name: "CARNEIRO INSTRUMENTOS MUSICAIS LTDA",
+      region: "Cachoeiro De Itapemirim — ES",
+      phone: "(27) 3239-3094",
+      email: "carneironotafiscal@carneiromusic.com.br",
+      whatsapp: "https://wa.me/552732393094?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20CARNEIRO%20INSTRUMENTOS%20MUSICAIS%20LTDA.",
+    },
+    {
+      name: "AUDIO CAPIXABA COMERCIAL LTDA",
+      region: "Guaçuí — ES",
+      phone: "(28) 3553-0670",
+      email: "vagner@caparaomusic.com.br",
+      whatsapp: "https://wa.me/552835530670?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20AUDIO%20CAPIXABA%20COMERCIAL%20LTDA.",
+    },
+    {
+      name: "Caparao Music Comercial Ltda",
+      region: "Guaçuí — ES",
+      phone: "—",
+      email: "",
+      whatsapp: "",
+    },
+    {
+      name: "FORTUNA MUSIC",
+      region: "Guarapari — ES",
+      phone: "(34) 99842-90444",
+      email: "contato@topsommusical.com.br",
+      whatsapp: "https://wa.me/55349984290444?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20FORTUNA%20MUSIC.",
+    },
+    {
+      name: "Major Music Ltda",
+      region: "Serra — ES",
+      phone: "(14) 98141-4429",
+      email: "srmusicaxx@gmail.com",
+      whatsapp: "https://wa.me/5514981414429?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20Major%20Music%20Ltda.",
+    },
+    {
+      name: "TM COMERCIO  LTDA",
+      region: "Serra — ES",
+      phone: "(27) 3223-9882",
+      email: "topmusic7@gmail.com",
+      whatsapp: "https://wa.me/552732239882?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20TM%20COMERCIO%20%20LTDA.",
+    },
+    {
+      name: "Comercial Atacama Ltda",
+      region: "Venda Nova Do Imigrante — ES",
+      phone: "(28) 3546-2269",
+      email: "vendas.atacamamusic@gmail.com",
+      whatsapp: "https://wa.me/552835462269?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20Comercial%20Atacama%20Ltda.",
+    },
+    {
+      name: "CARNEIRO VILA VELHA",
+      region: "Vila Velha — ES",
+      phone: "(27) 3239-3094",
+      email: "carneironotafiscal@carneiromusic.com.br",
+      whatsapp: "https://wa.me/552732393094?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20CARNEIRO%20VILA%20VELHA.",
+    },
+    {
+      name: "FABIO SHIGUERU TOKUMOTO COMERCIO",
+      region: "Vitória — ES",
+      phone: "(11) 94038-7997",
+      email: "nfe@kadenzaa.com.br",
+      whatsapp: "https://wa.me/5511940387997?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20FABIO%20SHIGUERU%20TOKUMOTO%20COMERCIO.",
+    },
+    {
+      name: "G G Proauto LTDA",
+      region: "Vitória — ES",
+      phone: "(27) 3222-7355",
+      email: "gbo095@gmail.com",
+      whatsapp: "https://wa.me/552732227355?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20G%20G%20Proauto%20LTDA.",
+    },
+    {
+      name: "KANASHIRO & STELLER UTILIDADES DOMESTICAS LTDA",
+      region: "Vitória — ES",
+      phone: "(11) 96933-4444",
+      email: "equiperl.vendasonline@gmail.com",
+      whatsapp: "https://wa.me/5511969334444?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20KANASHIRO%20%26%20STELLER%20UTILIDADES%20DOMESTICAS%20LTDA.",
+    },
+    {
+      name: "Shoper Sound Solutions Acustica Design Projetos LTDA",
+      region: "Vitória — ES",
+      phone: "(11) 5345-6651",
+      email: "legal.revolutiondream@gmail.com",
+      whatsapp: "https://wa.me/551153456651?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20Shoper%20Sound%20Solutions%20Acustica%20Design%20Projetos%20LTDA.",
+    },
+    {
+      name: "Tocarte Ltda",
+      region: "Vitória — ES",
+      phone: "(27) 99957-7688",
+      email: "novelli@hotmail.com",
+      whatsapp: "https://wa.me/5527999577688?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20Tocarte%20Ltda.",
+    },
+    {
+      name: "TOCARTE LTDA EPP",
+      region: "Vitória — ES",
+      phone: "(27) 3263-2738",
+      email: "daybson-novelli@hotmail.com",
+      whatsapp: "https://wa.me/552732632738?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20TOCARTE%20LTDA%20EPP.",
+    },
+    {
+      name: "Umberto Comercio de Aparelhos de Som Ltda",
+      region: "Vitória — ES",
+      phone: "(11) 94011-1031",
+      email: "contato@megasomsp.com",
+      whatsapp: "https://wa.me/5511940111031?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20Umberto%20Comercio%20de%20Aparelhos%20de%20Som%20Ltda.",
+    },
+  ],
+  BRGO: [
+    {
+      name: "Jesse Inacio Pereira Junior",
+      region: "Anápolis — GO",
+      phone: "(62) 3098-3610",
+      email: "acorde_musical@hotmail.com",
+      whatsapp: "https://wa.me/556230983610?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20Jesse%20Inacio%20Pereira%20Junior.",
+    },
+    {
+      name: "SPACE ÁUDIO ELETRÔNICA LTDA ME",
+      region: "Cristalina — GO",
+      phone: "(61) 99964-9074",
+      email: "spacemusiclza@gmail.com",
+      whatsapp: "https://wa.me/5561999649074?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20SPACE%20%C3%81UDIO%20ELETR%C3%94NICA%20LTDA%20ME.",
+    },
+    {
+      name: "Harmonia Musical Ltda",
+      region: "Goiânia — GO",
+      phone: "(62) 3240-0800",
+      email: "cpd@harmoniamusical.com.br",
+      whatsapp: "https://wa.me/556232400800?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20Harmonia%20Musical%20Ltda.",
+    },
+  ],
+  BRMG: [
+    {
+      name: "IMPORMUSICA INSTRUMENTOS MUSICAIS LTDA",
+      region: "Contagem — MG",
+      phone: "(31) 98745-9917",
+      email: "leandro@amaramusical.com.br",
+      whatsapp: "https://wa.me/5531987459917?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20IMPORMUSICA%20INSTRUMENTOS%20MUSICAIS%20LTDA.",
+    },
+    {
+      name: "ROGERIO LUCIOLI COELHO JUNIOR - ME",
+      region: "Governador Valadares — MG",
+      phone: "(33) 98409-3058",
+      email: "mutasom@hotmail.com",
+      whatsapp: "https://wa.me/5533984093058?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20ROGERIO%20LUCIOLI%20COELHO%20JUNIOR%20-%20ME.",
+    },
+    {
+      name: "WERLI FERREIRA DO AMARAL",
+      region: "Nova Serrana — MG",
+      phone: "(37) 3226-8353",
+      email: "evolusomlelinho@hotmail.com",
+      whatsapp: "https://wa.me/553732268353?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20WERLI%20FERREIRA%20DO%20AMARAL.",
+    },
+    {
+      name: "X5 - INSTRUMENTOS MUSICAIS LTDA",
+      region: "Varginha — MG",
+      phone: "(11) 3325-0101",
+      email: "financeiro@x5music.com.br",
+      whatsapp: "https://wa.me/551133250101?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20X5%20-%20INSTRUMENTOS%20MUSICAIS%20LTDA.",
+    },
+  ],
+  BRPR: [
+    {
+      name: "AUDIO PRO INSTRUMENTOS MUSICAIS LTDA",
+      region: "Cianorte — PR",
+      phone: "(44) 3629-5702",
+      email: "musicalcentersom@gmail.com",
+      whatsapp: "https://wa.me/554436295702?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20AUDIO%20PRO%20INSTRUMENTOS%20MUSICAIS%20LTDA.",
+    },
+    {
+      name: "Musitech Musica e Tecnologia Em Audio Ltda",
+      region: "Cornélio Procópio — PR",
+      phone: "(43) 99156-2070",
+      email: "musitech@musitech.com.br",
+      whatsapp: "https://wa.me/5543991562070?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20Musitech%20Musica%20e%20Tecnologia%20Em%20Audio%20Ltda.",
+    },
+    {
+      name: "Maxcomp Ltda",
+      region: "Londrina — PR",
+      phone: "(43) 3339-5151",
+      email: "sidney@maxcompmusical.com.br",
+      whatsapp: "https://wa.me/554333395151?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20Maxcomp%20Ltda.",
+    },
+    {
+      name: "MUSITECH INSTRUMENTOS MUSICAIS LTDA",
+      region: "Maringá — PR",
+      phone: "(44) 3028-0800",
+      email: "musitech@wnet.com.br",
+      whatsapp: "https://wa.me/554430280800?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20MUSITECH%20INSTRUMENTOS%20MUSICAIS%20LTDA.",
+    },
+  ],
+  BRRJ: [
+    {
+      name: "LUALOC LOCAÇÕES DE EQUIPAMENTOS E PROMOÇÕES DE EVENTOS LTDA",
+      region: "Rio De Janeiro — RJ",
+      phone: "(21) 97916-9999",
+      email: "lopesluac@gmail.com",
+      whatsapp: "https://wa.me/5521979169999?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20LUALOC%20LOCA%C3%87%C3%95ES%20DE%20EQUIPAMENTOS%20E%20PROMO%C3%87%C3%95ES%20DE%20EVENTOS%20LTDA.",
+    },
+    {
+      name: "Ml Musical Leopoldinense Ltda",
+      region: "Rio De Janeiro — RJ",
+      phone: "(21) 2260-7296",
+      email: "contato@mlmusical.com.br",
+      whatsapp: "https://wa.me/552122607296?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20Ml%20Musical%20Leopoldinense%20Ltda.",
+    },
+    {
+      name: "NS SOM E ILUMINAÇÃO PROFISSIONAL LTDA",
+      region: "Rio De Janeiro — RJ",
+      phone: "(21) 2501-7726",
+      email: "contatonssom@gmail.com",
+      whatsapp: "https://wa.me/552125017726?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20NS%20SOM%20E%20ILUMINA%C3%87%C3%83O%20PROFISSIONAL%20LTDA.",
+    },
+  ],
+  BRRS: [
+    {
+      name: "PORÃO MUSICAL",
+      region: "Porto Alegre — RS",
+      phone: "(51) 99812-3743",
+      email: "dalton.guerra@gmail.com",
+      whatsapp: "https://wa.me/5551998123743?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20POR%C3%83O%20MUSICAL.",
+    },
+    {
+      name: "Prisma Pro Audio Ltda  (RS)",
+      region: "Santa Cruz Do Sul — RS",
+      phone: "(19) 98422-9644",
+      email: "germano@prismaproaudio.com.br",
+      whatsapp: "https://wa.me/5519984229644?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20Prisma%20Pro%20Audio%20Ltda%20%20(RS).",
+    },
+  ],
+  BRSC: [
+    {
+      name: "Hitexx Music Comercio Ltda",
+      region: "Chapecó — SC",
+      phone: "(49) 99180-1386",
+      email: "mikemarques.94@gmail.com",
+      whatsapp: "https://wa.me/5549991801386?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20Hitexx%20Music%20Comercio%20Ltda.",
+    },
+    {
+      name: "MERCADAO DA MUSICA CRICIUMA",
+      region: "Criciúma — SC",
+      phone: "(48) 99932-9220",
+      email: "diegomoraes88@gmail.com",
+      whatsapp: "https://wa.me/5548999329220?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20MERCADAO%20DA%20MUSICA%20CRICIUMA.",
+    },
+    {
+      name: "A MUSICAL DE ORLEANS EIRELI",
+      region: "Orleans — SC",
+      phone: "—",
+      email: "",
+      whatsapp: "",
+    },
+    {
+      name: "TANGO MUSICA E INSTRUMENTOS LTDA",
+      region: "Palhoça — SC",
+      phone: "(11) 99453-7402",
+      email: "alvaro@tangomusic.com.br",
+      whatsapp: "https://wa.me/5511994537402?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20TANGO%20MUSICA%20E%20INSTRUMENTOS%20LTDA.",
+    },
+    {
+      name: "DDK LICITAÇÕES E CONTRATOS LTDA",
+      region: "Passo De Torres — SC",
+      phone: "(51) 99811-4712",
+      email: "cleber.gori@hotmail.com",
+      whatsapp: "https://wa.me/5551998114712?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20DDK%20LICITA%C3%87%C3%95ES%20E%20CONTRATOS%20LTDA.",
+    },
+  ],
+  BRSE: [
+    {
+      name: "MS AUDIO PARTS",
+      region: "Itabaiana — SE",
+      phone: "(79) 99837-1054",
+      email: "contato@msaudioparts.com",
+      whatsapp: "https://wa.me/5579998371054?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20MS%20AUDIO%20PARTS.",
+    },
+  ],
+  BRSP: [
+    {
+      name: "TINDAN MUSIC INSTRUMENTOS MUSICAIS LTDA",
+      region: "Araçatuba — SP",
+      phone: "(18) 3304-1300",
+      email: "garage50financeiro@gmail.com",
+      whatsapp: "https://wa.me/551833041300?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20TINDAN%20MUSIC%20INSTRUMENTOS%20MUSICAIS%20LTDA.",
+    },
+    {
+      name: "MATHEUS RODRIGUES FURTADO",
+      region: "Barueri — SP",
+      phone: "(11) 95023-2589",
+      email: "atendimento.crmkt@gmail.com",
+      whatsapp: "https://wa.me/5511950232589?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20MATHEUS%20RODRIGUES%20FURTADO.",
+    },
+    {
+      name: "Sabrina M. A. Fernandes Ltda.",
+      region: "Espírito Santo Do Pinhal — SP",
+      phone: "(19) 99573-1157",
+      email: "fabricadosom3@gmail.com",
+      whatsapp: "https://wa.me/5519995731157?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20Sabrina%20M.%20A.%20Fernandes%20Ltda..",
+    },
+    {
+      name: "Santiago Eletro Ltda",
+      region: "Garça — SP",
+      phone: "(14) 98133-9199",
+      email: "compras@santiagoeletro.com.br",
+      whatsapp: "https://wa.me/5514981339199?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20Santiago%20Eletro%20Ltda.",
+    },
+    {
+      name: "Fernando Rodrigues de Souza",
+      region: "Itapevi — SP",
+      phone: "(11) 4773-5884",
+      email: "flaymusical@gmail.com",
+      whatsapp: "https://wa.me/551147735884?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20Fernando%20Rodrigues%20de%20Souza.",
+    },
+    {
+      name: "FELIPE SEGOLIN",
+      region: "Jaú — SP",
+      phone: "(14) 99718-2235",
+      email: "felipesegolin@hotmail.com",
+      whatsapp: "https://wa.me/5514997182235?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20FELIPE%20SEGOLIN.",
+    },
+    {
+      name: "Jose Roberto de Oliveira Equipamentos de Som",
+      region: "Piracicaba — SP",
+      phone: "(19) 97409-9619",
+      email: "rta@rtaaudio.com.br",
+      whatsapp: "https://wa.me/5519974099619?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20Jose%20Roberto%20de%20Oliveira%20Equipamentos%20de%20Som.",
+    },
+    {
+      name: "Matheus Peres Brito",
+      region: "Promissão — SP",
+      phone: "(14) 99185-3508",
+      email: "tocarinstrumentosmusicais@hotmail.com",
+      whatsapp: "https://wa.me/5514991853508?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20Matheus%20Peres%20Brito.",
+    },
+    {
+      name: "JULIANO RANGEL DE OLIVEIRA",
+      region: "Rio Claro — SP",
+      phone: "(19) 99928-8983",
+      email: "",
+      whatsapp: "https://wa.me/5519999288983?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20JULIANO%20RANGEL%20DE%20OLIVEIRA.",
+    },
+    {
+      name: "Jeday Audio Iluminacao e Instrumentos Musicais Ltda",
+      region: "Salto — SP",
+      phone: "(11) 4029-4191",
+      email: "jedaysomins@uol.com.br",
+      whatsapp: "https://wa.me/551140294191?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20Jeday%20Audio%20Iluminacao%20e%20Instrumentos%20Musicais%20Ltda.",
+    },
+    {
+      name: "ALEXANDRE MOYSES COMERCIO DE EQUIPAMENTOS",
+      region: "São Paulo — SP",
+      phone: "(11) 992585-5820",
+      email: "aledrummer@gmail.com",
+      whatsapp: "https://wa.me/55119925855820?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20ALEXANDRE%20MOYSES%20COMERCIO%20DE%20EQUIPAMENTOS.",
+    },
+    {
+      name: "FABIO SHIGUERU TOKUMOTO",
+      region: "São Paulo — SP",
+      phone: "(11) 94590-1414",
+      email: "nfe@kadenzaa.com.br",
+      whatsapp: "https://wa.me/5511945901414?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20FABIO%20SHIGUERU%20TOKUMOTO.",
+    },
+    {
+      name: "KINGDOM SOUND IMAGEM E SOM LTDA",
+      region: "São Paulo — SP",
+      phone: "(11) 98317-8760",
+      email: "compras@kalifa.com.br",
+      whatsapp: "https://wa.me/5511983178760?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20KINGDOM%20SOUND%20IMAGEM%20E%20SOM%20LTDA.",
+    },
+    {
+      name: "MWL ACUSTIC INSTRUMENTOS MUSICAIS LTDA",
+      region: "São Paulo — SP",
+      phone: "(11) 5522-0164",
+      email: "mariavilmamaialazaro@gmail.com",
+      whatsapp: "https://wa.me/551155220164?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20MWL%20ACUSTIC%20INSTRUMENTOS%20MUSICAIS%20LTDA.",
+    },
+    {
+      name: "Rvg Comercio de Instrumentos Musicais e Acessorios Ltda",
+      region: "São Paulo — SP",
+      phone: "(11) 98578-4047",
+      email: "matheuscazelato@cazeshop.com.br",
+      whatsapp: "https://wa.me/5511985784047?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20Rvg%20Comercio%20de%20Instrumentos%20Musicais%20e%20Acessorios%20Ltda.",
+    },
+    {
+      name: "SSS SOLUÇÕES AUDIOVISUAIS SOCIEDADE UNIPESSOAL LTDA",
+      region: "São Paulo — SP",
+      phone: "(11) 5272-4258",
+      email: "adm.ssssolucoes@gmail.com",
+      whatsapp: "https://wa.me/551152724258?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20SSS%20SOLU%C3%87%C3%95ES%20AUDIOVISUAIS%20SOCIEDADE%20UNIPESSOAL%20LTDA.",
+    },
+    {
+      name: "Power Sound Music Store Ltda",
+      region: "Suzano — SP",
+      phone: "—",
+      email: "powersoundsuzano@hotmail.com",
+      whatsapp: "",
+    },
+  ],
 };
