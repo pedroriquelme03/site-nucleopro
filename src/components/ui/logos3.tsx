@@ -15,6 +15,7 @@ interface Logos3Props {
   logos?: Logo[];
   className?: string;
   id?: string;
+  onLogoClick?: (logo: Logo) => void;
 }
 
 const defaultLogos: Logo[] = [
@@ -34,8 +35,10 @@ const Logos3 = ({
   logos = defaultLogos,
   className,
   id,
+  onLogoClick,
 }: Logos3Props) => {
   const track = [...logos, ...logos];
+  const clickable = Boolean(onLogoClick);
 
   return (
     <section id={id} className={cn("overflow-x-hidden py-20 sm:py-28", className)}>
@@ -69,20 +72,35 @@ const Logos3 = ({
                 >
                   <div className="mx-3 flex w-full py-1 sm:mx-4">
                     {logo.image ? (
-                      <div
+                      <button
+                        type="button"
+                        disabled={!clickable}
+                        onClick={() => onLogoClick?.(logo)}
                         className={cn(
-                          "flex h-24 w-full items-center justify-center rounded-xl bg-white p-4 shadow-sm ring-1 ring-black/5 transition duration-300 hover:-translate-y-1 hover:shadow-md",
+                          "flex h-24 w-full items-center justify-center rounded-xl bg-white p-4 shadow-sm ring-1 ring-black/5 transition duration-300",
+                          clickable &&
+                            "cursor-pointer hover:-translate-y-1 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand",
+                          !clickable && "pointer-events-none",
                           logo.className,
                         )}
-                        title={logo.description}
+                        title={
+                          clickable
+                            ? `Ver ${logo.description} no mapa`
+                            : logo.description
+                        }
+                        aria-label={
+                          clickable
+                            ? `Ver ${logo.description} no mapa Onde comprar`
+                            : logo.description
+                        }
                       >
                         <img
                           src={logo.image}
-                          alt={logo.description}
+                          alt=""
                           loading="lazy"
                           className="max-h-full max-w-full object-contain"
                         />
-                      </div>
+                      </button>
                     ) : (
                       <div className="flex h-24 w-full items-center justify-center rounded-xl bg-white p-4 shadow-sm ring-1 ring-black/5">
                         <span

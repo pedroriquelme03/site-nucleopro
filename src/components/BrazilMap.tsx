@@ -1,5 +1,9 @@
 import { memo, useCallback, useEffect, useRef, useState } from "react";
-import { dealersByState } from "@/data/dealers";
+import { dealersByState, type Representative } from "@/data/dealers";
+import {
+  SELECT_DEALER_EVENT,
+  type SelectDealerDetail,
+} from "@/lib/select-dealer";
 import { WhatsAppIcon } from "./WhatsAppIcon";
 import "./brazil-map.css";
 
@@ -8,6 +12,11 @@ type MapState = {
   name: string;
   x: number;
   y: number;
+};
+
+type FocusedDealer = {
+  name: string;
+  label: string;
 };
 
 const BrazilSvg = memo(function BrazilSvg({
@@ -116,11 +125,61 @@ const BrazilSvg = memo(function BrazilSvg({
   return <div ref={hostRef} className="brazil-map" dangerouslySetInnerHTML={{ __html: markup }} />;
 });
 
+function buildDealerList(
+  stateId: string,
+  stateName: string,
+  focus: FocusedDealer | null,
+): Representative[] {
+  const base = [...(dealersByState[stateId] ?? [])];
+  if (!focus) return base;
+
+  const matchIndex = base.findIndex((d) => d.name === focus.name);
+  if (matchIndex >= 0) {
+    const [match] = base.splice(matchIndex, 1);
+    return [{ ...match, name: focus.label || match.name }, ...base];
+  }
+
+  return [
+    {
+      name: focus.label,
+      region: stateName,
+      phone: "—",
+      email: "",
+      whatsapp: "",
+    },
+    ...base,
+  ];
+}
+
 export function BrazilMap() {
   const wrapRef = useRef<HTMLDivElement>(null);
+  const pendingFocus = useRef<SelectDealerDetail | null>(null);
   const [markup, setMarkup] = useState("");
   const [hover, setHover] = useState<MapState | null>(null);
   const [selected, setSelected] = useState<MapState | null>(null);
+  const [focus, setFocus] = useState<FocusedDealer | null>(null);
+
+  const applySelection = useCallback((detail: SelectDealerDetail) => {
+    const wrap = wrapRef.current;
+    if (!wrap) return false;
+    const path = wrap.querySelector<SVGPathElement>(`path#${detail.stateId}`);
+    if (!path) return false;
+
+    const bbox = path.getBoundingClientRect();
+    const hostBox = wrap.getBoundingClientRect();
+    setSelected({
+      id: detail.stateId,
+      name: path.getAttribute("name") ?? detail.stateId,
+      x: bbox.left + bbox.width / 2 - hostBox.left,
+      y: bbox.top + bbox.height / 2 - hostBox.top,
+    });
+    setFocus({
+      name: detail.dealerName ?? detail.label,
+      label: detail.label,
+    });
+    setHover(null);
+    return true;
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -138,16 +197,38 @@ export function BrazilMap() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!markup || !pendingFocus.current) return;
+    if (applySelection(pendingFocus.current)) {
+      pendingFocus.current = null;
+    }
+  }, [markup, applySelection]);
+
+  useEffect(() => {
+    const onSelectDealer = (event: Event) => {
+      const detail = (event as CustomEvent<SelectDealerDetail>).detail;
+      if (!detail?.stateId) return;
+      if (!applySelection(detail)) {
+        pendingFocus.current = detail;
+      }
+    };
+    window.addEventListener(SELECT_DEALER_EVENT, onSelectDealer);
+    return () => window.removeEventListener(SELECT_DEALER_EVENT, onSelectDealer);
+  }, [applySelection]);
+
   const onHoverChange = useCallback((next: MapState | null) => {
     setHover(next);
   }, []);
 
   const onSelect = useCallback((next: MapState) => {
+    setFocus(null);
     setSelected((current) => (current?.id === next.id ? current : next));
   }, []);
 
   const active = selected ?? hover;
-  const dealers = active ? dealersByState[active.id] ?? [] : [];
+  const dealers = active
+    ? buildDealerList(active.id, active.name, selected ? focus : null)
+    : [];
   const showPanel = Boolean(selected && dealers.length);
   const width = wrapRef.current?.clientWidth ?? 480;
   const cardX = active ? Math.min(Math.max(active.x, 136), width - 136) : 0;
@@ -160,6 +241,7 @@ export function BrazilMap() {
       onClick={(event) => {
         if (!(event.target as Element).closest("path[id^='BR'], .dealer-card")) {
           setSelected(null);
+          setFocus(null);
         }
       }}
     >
@@ -182,26 +264,36 @@ export function BrazilMap() {
         >
           <p className="text-[11px] font-semibold uppercase tracking-widest text-brand">{active.name}</p>
           <div className="mt-2 space-y-3">
-            {dealers.map((dealer) => (
-              <div key={`${dealer.name}-${dealer.region}`} className="border-t border-line/70 pt-3 first:border-t-0 first:pt-0">
-                <p className="font-display text-sm font-bold text-white">{dealer.name}</p>
-                <p className="mt-0.5 text-xs text-slate-400">{dealer.region}</p>
-                {dealer.phone && dealer.phone !== "—" ? (
-                  <p className="mt-1 text-sm font-semibold text-white">{dealer.phone}</p>
-                ) : null}
-                {showPanel && dealer.whatsapp ? (
-                  <a
-                    href={dealer.whatsapp}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-white to-white px-3 py-2 text-xs font-semibold text-ink-950 shadow-glow-sm transition-all hover:to-[#a97c50] active:scale-95"
-                  >
-                    <WhatsAppIcon className="h-4 w-4" />
-                    Falar no WhatsApp
-                  </a>
-                ) : null}
-              </div>
-            ))}
+            {dealers.map((dealer, index) => {
+              const isFocused = Boolean(focus && index === 0 && selected);
+              return (
+                <div
+                  key={`${dealer.name}-${dealer.region}-${index}`}
+                  className={`border-t border-line/70 pt-3 first:border-t-0 first:pt-0 ${
+                    isFocused ? "rounded-lg bg-brand/10 px-2 py-2 ring-1 ring-brand/40" : ""
+                  }`}
+                >
+                  <p className="font-display text-sm font-bold text-white">{dealer.name}</p>
+                  {dealer.region && dealer.region !== dealer.name ? (
+                    <p className="mt-0.5 text-xs text-slate-400">{dealer.region}</p>
+                  ) : null}
+                  {dealer.phone && dealer.phone !== "—" ? (
+                    <p className="mt-1 text-sm font-semibold text-white">{dealer.phone}</p>
+                  ) : null}
+                  {showPanel && dealer.whatsapp ? (
+                    <a
+                      href={dealer.whatsapp}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-white to-white px-3 py-2 text-xs font-semibold text-ink-950 shadow-glow-sm transition-all hover:to-[#a97c50] active:scale-95"
+                    >
+                      <WhatsAppIcon className="h-4 w-4" />
+                      Falar no WhatsApp
+                    </a>
+                  ) : null}
+                </div>
+              );
+            })}
           </div>
           {showPanel ? null : (
             <p className="mt-2 text-[11px] text-slate-500">Clique no estado para ver o contato</p>

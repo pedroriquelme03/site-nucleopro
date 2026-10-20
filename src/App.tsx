@@ -11,6 +11,7 @@ import { WhereToBuy } from "./components/WhereToBuy";
 import { News } from "./components/News";
 import { PartnerHero } from "./components/PartnerHero";
 import { Footer } from "./components/Footer";
+import { PartnerFormHost } from "./components/PartnerFormHost";
 import { FloatingWhatsApp } from "./components/FloatingWhatsApp";
 import { MarcasPage } from "./components/MarcasPage";
 import { CatalogPage } from "./components/CatalogPage";
@@ -31,6 +32,7 @@ function Layout({ children }: { children: React.ReactNode }) {
       <Navbar />
       {children}
       <Footer />
+      <PartnerFormHost />
       <FloatingWhatsApp />
     </div>
   );

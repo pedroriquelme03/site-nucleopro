@@ -2,11 +2,11 @@ import { Instagram } from "lucide-react";
 import { Logo } from "./Logo";
 import { WhatsAppIcon } from "./WhatsAppIcon";
 import { catalogCategories } from "@/data/catalog";
+import { openPartnerForm } from "@/lib/partner-form";
 import { INSTAGRAM_URL, WHATSAPP_URL } from "@/lib/utils";
 
 export function Footer() {
   const nav = [
-    { label: "Representante comercial", href: "/#parceiros" },
     { label: "Blog", href: "/blog" },
     { label: "Quem somos", href: "/sobre-nos" },
     { label: "Suporte", href: "/suporte" },
@@ -56,6 +56,15 @@ export function Footer() {
               Navegação
             </h4>
             <ul className="mt-4 space-y-2.5">
+              <li>
+                <button
+                  type="button"
+                  onClick={openPartnerForm}
+                  className="text-sm text-slate-400 transition-colors hover:text-brand"
+                >
+                  Representante comercial
+                </button>
+              </li>
               {nav.map((n) => (
                 <li key={n.href}>
                   <a href={n.href} className="text-sm text-slate-400 transition-colors hover:text-brand">
