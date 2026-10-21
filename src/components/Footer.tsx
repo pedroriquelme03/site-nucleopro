@@ -28,8 +28,8 @@ export function Footer() {
           <div>
             <Logo />
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-slate-400">
-              Distribuidora oficial Mackie no Brasil. Equipamentos de áudio high-end com suporte
-              técnico especializado e entrega nacional.
+              Distribuidora oficial Mackie no Brasil. Equipamentos de áudio profissional com suporte
+              técnico especializado, garantia e pós venda com excelência!
             </p>
             <div className="mt-5 flex gap-3">
               <a

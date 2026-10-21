@@ -2,16 +2,16 @@ import { ArrowUpRight } from "lucide-react";
 
 function AboutCopy() {
   return (
-    <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 px-4 pb-24 pt-12 md:grid-cols-12">
+    <div className="relative z-10 mx-auto grid max-w-5xl grid-cols-1 gap-8 px-4 pb-24 pt-12 md:grid-cols-12">
       <h2 className="col-span-1 font-display text-3xl font-bold tracking-tight text-white md:col-span-4">
         Distribuidor oficial
       </h2>
       <div className="col-span-1 md:col-span-8">
-        <p className="mb-4 text-xl leading-relaxed text-slate-400 md:text-2xl">
+        <p className="mb-4 text-xl leading-relaxed text-slate-200 md:text-2xl">
           A Núcleo ProAudio leva a linha Mackie ao palco, à igreja e à instalação fixa com produto
           original, garantia de fábrica e quem entende o sistema do começo ao fim.
         </p>
-        <p className="mb-8 text-xl leading-relaxed text-slate-400 md:text-2xl">
+        <p className="mb-8 text-xl leading-relaxed text-slate-200 md:text-2xl">
           Não é vitrine. É especificação, suporte e entrega para quem não pode errar o som.
         </p>
         <a
@@ -28,7 +28,18 @@ function AboutCopy() {
 
 export function About() {
   return (
-    <section id="sobre-nos" className="scroll-mt-20 bg-ink-950">
+    <section id="sobre-nos" className="relative scroll-mt-20 overflow-hidden">
+      <img
+        src="/about/distribuidor-oficial.webp"
+        alt=""
+        aria-hidden
+        className="absolute inset-0 h-full w-full object-cover object-center"
+      />
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-gradient-to-b from-ink-950/85 via-ink-950/75 to-ink-950/90"
+      />
+      <div aria-hidden className="absolute inset-0 bg-ink-950/40" />
       <AboutCopy />
     </section>
   );

@@ -147,18 +147,36 @@ export function Gallery4({ title, description, items, cta }: Gallery4Props) {
         </button>
       </div>
 
-      <div className="mt-8 flex justify-center gap-2">
-        {items.map((item, index) => (
-          <button
-            key={item.id}
-            type="button"
-            className={`h-2 w-2 rounded-full transition-colors ${
-              currentSlide === index ? "bg-brand" : "bg-brand/20"
-            }`}
-            onClick={() => carouselApi?.scrollTo(index)}
-            aria-label={`Ir para a categoria ${index + 1}`}
-          />
-        ))}
+      <div className="mt-8 flex items-center justify-center gap-3">
+        <button
+          type="button"
+          onClick={scrollPrev}
+          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-slate-400 transition-colors hover:text-brand"
+          aria-label="Categoria anterior"
+        >
+          <ChevronLeft className="h-5 w-5" />
+        </button>
+        <div className="flex items-center gap-2">
+          {items.map((item, index) => (
+            <button
+              key={item.id}
+              type="button"
+              className={`h-2 w-2 rounded-full transition-colors ${
+                currentSlide === index ? "bg-brand" : "bg-brand/20"
+              }`}
+              onClick={() => carouselApi?.scrollTo(index)}
+              aria-label={`Ir para a categoria ${index + 1}`}
+            />
+          ))}
+        </div>
+        <button
+          type="button"
+          onClick={scrollNext}
+          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-slate-400 transition-colors hover:text-brand"
+          aria-label="Próxima categoria"
+        >
+          <ChevronRight className="h-5 w-5" />
+        </button>
       </div>
     </div>
   );
