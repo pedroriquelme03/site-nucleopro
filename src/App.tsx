@@ -25,6 +25,7 @@ import { ProductPage } from "./components/ProductPage";
 import { ManuaisPage } from "./components/ManuaisPage";
 import { BlogPage } from "./components/BlogPage";
 import { BlogPostPage } from "./components/BlogPostPage";
+import { RepresentantesPage } from "./components/RepresentantesPage";
 
 function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -120,6 +121,14 @@ export default function App() {
     return (
       <Layout>
         <SuportePage />
+      </Layout>
+    );
+  }
+
+  if (path === "/representantes") {
+    return (
+      <Layout>
+        <RepresentantesPage />
       </Layout>
     );
   }

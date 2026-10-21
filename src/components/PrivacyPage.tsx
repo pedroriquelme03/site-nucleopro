@@ -29,6 +29,7 @@ export function PrivacyPage() {
         <p>Podemos tratar, conforme o uso do site:</p>
         <ul className="list-disc space-y-1 pl-5">
           <li>CNPJ, estado, tipo de revenda, e-mail e WhatsApp enviados no cadastro de parceiro;</li>
+          <li>nome, e-mail e WhatsApp enviados na inscrição da newsletter;</li>
           <li>informações que você enviar pelo WhatsApp ao falar com a Núcleo;</li>
           <li>dados técnicos de navegação, como endereço IP, tipo de dispositivo e páginas visitadas.</li>
         </ul>
@@ -40,6 +41,7 @@ export function PrivacyPage() {
         <ul className="list-disc space-y-1 pl-5">
           <li>responder cotações, pedidos de suporte, garantia e assistência técnica;</li>
           <li>indicar revendedores e atender lojistas ou integradores;</li>
+          <li>enviar novidades da newsletter, quando você se inscrever;</li>
           <li>melhorar o site e a comunicação comercial da Núcleo.</li>
         </ul>
         <p>

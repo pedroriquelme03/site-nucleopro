@@ -9,6 +9,7 @@ const pages = [
   { label: "Marcas", href: "/marcas" },
   { label: "Sobre nós", href: "/sobre-nos" },
   { label: "Suporte", href: "/suporte" },
+  { label: "Representantes", href: "/representantes" },
   { label: "Política de privacidade", href: "/politica-de-privacidade" },
   { label: "Termos de uso", href: "/termos-de-uso" },
 ];

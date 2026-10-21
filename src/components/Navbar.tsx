@@ -7,6 +7,7 @@ import { catalogCategoryById, productImageSrc, productPagePath, searchCatalog } 
 const links = [
   { label: "Catálogo", href: "/catalogo" },
   { label: "Marcas", href: "/marcas" },
+  { label: "Representantes", href: "/representantes" },
   { label: "Onde comprar", href: "/#onde-comprar" },
   { label: "Notícias", href: "/#noticias" },
 ];
@@ -22,6 +23,7 @@ export function Navbar() {
   const path = window.location.pathname.replace(/\/$/, "") || "/";
   const onMarcas = path === "/marcas";
   const onCatalogo = path === "/catalogo" || path.startsWith("/produto/");
+  const onRepresentantes = path === "/representantes";
   const [open, setOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -81,11 +83,11 @@ export function Navbar() {
               href={l.href}
               className={cn(
                 "rounded-lg px-2.5 py-2 text-sm font-medium transition-colors hover:text-white",
-                l.href === "/marcas" && onMarcas
+                (l.href === "/marcas" && onMarcas) ||
+                (l.href === "/catalogo" && onCatalogo) ||
+                (l.href === "/representantes" && onRepresentantes)
                   ? "text-white"
-                  : l.href === "/catalogo" && onCatalogo
-                    ? "text-white"
-                    : "text-slate-300",
+                  : "text-slate-300",
               )}
             >
               {l.label}

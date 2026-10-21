@@ -2,11 +2,12 @@ import { Instagram } from "lucide-react";
 import { Logo } from "./Logo";
 import { WhatsAppIcon } from "./WhatsAppIcon";
 import { catalogCategories } from "@/data/catalog";
-import { openPartnerForm } from "@/lib/partner-form";
 import { INSTAGRAM_URL, WHATSAPP_URL } from "@/lib/utils";
+import { NewsletterBar } from "./NewsletterBar";
 
 export function Footer() {
   const nav = [
+    { label: "Representantes", href: "/representantes" },
     { label: "Blog", href: "/blog" },
     { label: "Quem somos", href: "/sobre-nos" },
     { label: "Suporte", href: "/suporte" },
@@ -21,6 +22,7 @@ export function Footer() {
 
   return (
     <footer className="border-t border-line bg-ink-950">
+      <NewsletterBar />
       <div className="container-x py-14">
         <div className="grid gap-10 lg:grid-cols-[1.3fr_0.9fr_0.9fr_0.9fr]">
           <div>
@@ -56,15 +58,6 @@ export function Footer() {
               Navegação
             </h4>
             <ul className="mt-4 space-y-2.5">
-              <li>
-                <button
-                  type="button"
-                  onClick={openPartnerForm}
-                  className="text-sm text-slate-400 transition-colors hover:text-brand"
-                >
-                  Representante comercial
-                </button>
-              </li>
               {nav.map((n) => (
                 <li key={n.href}>
                   <a href={n.href} className="text-sm text-slate-400 transition-colors hover:text-brand">
