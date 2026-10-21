@@ -38,7 +38,7 @@ function representative(
     phone: formatPhone(phone),
     email,
     whatsapp: `https://wa.me/${whatsappDigits(phone)}?text=${encodeURIComponent(
-      `Olá, ${firstName}! Vim pelo site da Núcleo ProAudio e gostaria de falar sobre representação comercial.`,
+      `Olá, ${firstName}! Vim pelo site da Núcleo ProAudio e gostaria de falar sobre produtos da Mackie.`,
     )}`,
   };
 }

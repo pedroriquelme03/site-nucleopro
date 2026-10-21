@@ -18,4 +18,10 @@ export const HERO_VIDEOS = [
     poster: "/hero/profx.jpg",
     label: "Mackie ProFX",
   },
+  {
+    id: "go-places",
+    src: "/hero/go-places.mp4",
+    poster: "/hero/go-places.jpg",
+    label: "Mackie Go Places",
+  },
 ] as const;

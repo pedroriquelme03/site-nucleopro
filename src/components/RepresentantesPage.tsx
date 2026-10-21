@@ -6,7 +6,6 @@ import {
   representativeStates,
   type CommercialRepresentative,
 } from "@/data/representatives";
-import { RepresentanteForm } from "./RepresentanteForm";
 import { SectionHeading } from "./SectionHeading";
 import { WhatsAppIcon } from "./WhatsAppIcon";
 
@@ -49,12 +48,6 @@ export function RepresentantesPage() {
             title="Representantes comerciais"
             description="Fale com o representante Mackie da sua região. A Núcleo atende o Brasil com equipe comercial para lojistas, integradores e parceiros."
           />
-          <a
-            href="#cadastro"
-            className="mt-6 inline-flex items-center rounded-xl border border-line bg-ink-800/40 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:border-brand/50 hover:text-brand"
-          >
-            Quero ser representante
-          </a>
 
           <div className="mt-8 flex max-w-3xl flex-col gap-3 md:flex-row md:items-center">
             <div className="relative min-w-0 flex-1">
@@ -134,7 +127,6 @@ export function RepresentantesPage() {
           )}
         </div>
       </section>
-      <RepresentanteForm />
     </main>
   );
 }
