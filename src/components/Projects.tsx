@@ -82,7 +82,7 @@ export function Projects() {
       <div className="container-x">
         <Gallery4
           title="Categorias de produtos"
-          description="Live Sound, Battery-Powered, Home Studio e mais — escolha a linha Mackie para palco, estúdio ou operação a bateria."
+          description="Live Sound, Battery-Powered, Home Studio e muito mais — encontre a solução Mackie ideal para o palco, o estúdio ou onde você precisar de áudio profissional."
           cta={{ label: "Ver todas as categorias", href: "/catalogo?categoria=todos" }}
           items={categoryItems}
         />

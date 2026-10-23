@@ -37,9 +37,8 @@ export function About() {
       />
       <div
         aria-hidden
-        className="absolute inset-0 bg-gradient-to-b from-ink-950/85 via-ink-950/75 to-ink-950/90"
+        className="absolute inset-0 bg-gradient-to-bl from-ink-950/70 via-ink-950/45 to-ink-950/20"
       />
-      <div aria-hidden className="absolute inset-0 bg-ink-950/40" />
       <AboutCopy />
     </section>
   );

@@ -10,8 +10,7 @@ export function Footer() {
     { label: "Representantes", href: "/representantes" },
     { label: "Blog", href: "/blog" },
     { label: "Quem somos", href: "/sobre-nos" },
-    { label: "Suporte", href: "/suporte" },
-    { label: "Parceiros", href: "/#parceiros" },
+    { label: "Parceiros", href: "/#onde-comprar" },
   ];
 
   const legal = [

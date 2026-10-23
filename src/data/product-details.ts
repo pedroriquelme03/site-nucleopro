@@ -14,31 +14,20 @@ export type ProductVideo = { id?: string; src?: string; title: string };
 
 const BRANDFOLDER_CDN = "https://cdn.bfldr.com/ED3NUCEN/as";
 
+/** Banners por categoria — `/public/categorias` (fallback para categorias sem arte). */
 const BANNER_BY_CATEGORY: Record<string, string> = {
-  "mixers-digitais":
-    "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=1920&q=80",
-  "mixers-analogicos":
-    "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=1920&q=80",
-  "caixas-ativas":
-    "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=1920&q=80",
-  "line-array-vertical":
-    "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=1920&q=80",
-  "line-array":
-    "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=1920&q=80",
-  portateis:
-    "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1920&q=80",
-  monitores:
-    "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=1920&q=80",
-  controle:
-    "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=1920&q=80",
-  microfones:
-    "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1920&q=80",
-  fones:
-    "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=1920&q=80",
-  "amp-fone":
-    "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=1920&q=80",
-  "direct-box":
-    "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=1920&q=80",
+  "caixas-ativas": "/categorias/caixas-ativas.jpg",
+  "line-array": "/categorias/line-array.jpg",
+  "line-array-vertical": "/categorias/line-array-vertical.jpg",
+  portateis: "/categorias/portateis.jpg",
+  monitores: "/categorias/monitores.jpg",
+  controle: "/categorias/controle.jpg",
+  "mixers-analogicos": "/categorias/mixers-analogicos.jpg",
+  "mixers-digitais": "/categorias/mixers-digitais.jpg",
+  fones: "/categorias/fones.jpg",
+  microfones: "/categorias/microfones.jpg",
+  "amp-fone": "/categorias/fones.jpg",
+  "direct-box": "/categorias/caixas-ativas.jpg",
 };
 
 // Vídeos oficiais do canal MackieTV (youtube.com/user/mackietv), por produto/série.

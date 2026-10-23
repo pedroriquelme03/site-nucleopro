@@ -78,7 +78,7 @@ export function ProductShowcase() {
         <div className="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-end">
           <SectionHeading
             title="Linha de produtos"
-            description="Do controlador de estúdio ao mixer digital de palco — a linha Mackie completa, pronta para entrega no Brasil."
+            description="Do estúdio ao palco, conte com a Mackie — linha completa, qualidade profissional e pronta entrega no Brasil."
           />
         </div>
 

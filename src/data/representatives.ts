@@ -54,7 +54,7 @@ export const commercialRepresentatives: CommercialRepresentative[] = [
   representative("Luiz Zen", "Paraná", ["PR"], "41 9981-6764", "luizfzen@aol.com"),
   representative("Dinho Mourão", "Minas Gerais", ["MG"], "31 8899-7387", "dinhomourao@gmail.com"),
   representative("André Angelo", "AL, PE, PB e RN", ["AL", "PE", "PB", "RN"], "81 9974-3835", "andreangelosofia@gmail.com"),
-  representative("João Pedro", "São Paulo — Capital", ["SP"], "11 95196-2107", "jp_representacao@yahoo.com"),
+  representative("João Pedro", "São Paulo — DDD 11 - 12 - 13 Capital", ["SP"], "11 95196-2107", "jp_representacao@yahoo.com"),
   representative("Beto Teixeira", "AP e PA", ["AP", "PA"], "91 8319-7279", "betoteixeirajr@hotmail.com"),
   representative("Franklin", "MA e PI", ["MA", "PI"], "98 8402-9150", "ffrepresentacoes2010@gmail.com"),
   representative("Felipe Medeiros", "AC e RO", ["AC", "RO"], "69 9244-3360", "willian.felipe@migorepresentacoes.com"),

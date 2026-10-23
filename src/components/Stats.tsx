@@ -10,6 +10,7 @@ interface Stat {
 
 const stats: Stat[] = [
   { value: 50, prefix: "+de ", label: "Produtos" },
+  { value: 250, prefix: "+de ", label: "Revendas" },
   { value: 100, suffix: "%", label: "Distribuidor oficial" },
   { value: 27, suffix: " estados", label: "Entrega nacional" },
   { value: 1, prefix: "#", label: "Se é Mackie, é Núcleo" },
@@ -49,7 +50,7 @@ export function Stats() {
   return (
     <section className="border-y border-line bg-gradient-to-b from-ink-900/60 to-ink-950 py-16">
       <div className="container-x">
-        <div className="grid grid-cols-2 gap-6 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
           {stats.map((s, i) => (
             <motion.div
               key={s.label}
