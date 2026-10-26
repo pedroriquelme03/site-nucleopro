@@ -15,7 +15,7 @@ import {
   productSpecs,
   productVideos,
 } from "@/data/product-details";
-import { cn, WHATSAPP_NUMBER } from "@/lib/utils";
+import { cn, WHATSAPP_URL } from "@/lib/utils";
 import { WhatsAppIcon } from "./WhatsAppIcon";
 
 type Tab = "specs" | "images" | "manuals" | "videos";
@@ -71,9 +71,7 @@ export function ProductPage({ slug }: { slug: string }) {
   const gallery = productGallery(product);
   const manuals = productManuals(product);
   const videos = productVideos(product);
-  const quoteUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-    `Olá! Tenho interesse no ${product.name} (Mackie). Poderiam me passar mais informações?`,
-  )}`;
+  const quoteUrl = WHATSAPP_URL;
   const related = catalogProducts.filter((item) => item.category === product.category && item.slug !== product.slug).slice(0, 4);
 
   return (

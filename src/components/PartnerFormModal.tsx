@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Send, Store, X } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn, CONTACT_EMAIL } from "@/lib/utils";
 
 type StoreType = "fisica" | "online" | "ambos" | "";
 
-const PARTNER_EMAIL = "alexandre.medeiros@nucleoproaudio.com.br";
 
 const UFS: { uf: string; name: string }[] = [
   { uf: "AC", name: "Acre" },
@@ -118,7 +117,7 @@ export function PartnerFormModal({
 
     setSending(true);
     try {
-      const response = await fetch(`https://formsubmit.co/ajax/${PARTNER_EMAIL}`, {
+      const response = await fetch(`https://formsubmit.co/ajax/${CONTACT_EMAIL}`, {
         method: "POST",
         headers: { Accept: "application/json" },
         body: data,
@@ -310,7 +309,7 @@ export function PartnerFormModal({
                   {sending ? "Enviando..." : "Enviar cadastro"}
                 </button>
                 <p className="mt-3 text-center text-xs text-slate-500">
-                  O cadastro é enviado para {PARTNER_EMAIL}.
+                  O cadastro é enviado para {CONTACT_EMAIL}.
                 </p>
               </>
             )}

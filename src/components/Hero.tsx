@@ -52,7 +52,7 @@ function LocalVideoCover({
         decoding="async"
         fetchPriority={priority ? "high" : "low"}
         className={cn(
-          "absolute inset-0 h-full w-full object-cover transition-opacity duration-500",
+          "absolute inset-0 h-full w-full object-contain transition-opacity duration-500",
           ready && active ? "opacity-0" : "opacity-100",
         )}
       />
@@ -76,7 +76,7 @@ function LocalVideoCover({
         onPlaying={() => setReady(true)}
         onEnded={onEnded}
         className={cn(
-          "pointer-events-none absolute left-1/2 top-1/2 h-[56.25vw] min-h-[125%] w-[177.78vh] min-w-[125%] -translate-x-1/2 -translate-y-1/2 object-cover transition-opacity duration-500",
+          "pointer-events-none absolute inset-0 h-full w-full object-contain transition-opacity duration-500",
           ready && active ? "opacity-100" : "opacity-0",
         )}
       />
@@ -142,7 +142,7 @@ export function Hero() {
   }, [paused, hidden, slide]);
 
   return (
-    <section id="top" className="relative mt-16 h-[calc(100svh-4rem)] w-full overflow-hidden bg-black">
+    <section id="top" className="relative mt-16 aspect-video w-full overflow-hidden bg-black">
       <h1 className="sr-only">Qualidade em cada som, do estúdio ao palco.</h1>
 
       {VIDEOS.map((video, index) => {

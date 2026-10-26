@@ -58,7 +58,11 @@ export function Stats() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: i * 0.08 }}
-              className="text-center lg:text-left"
+              className={
+                i === stats.length - 1
+                  ? "col-span-2 text-center sm:col-span-1 lg:text-left"
+                  : "text-center lg:text-left"
+              }
             >
               <p className="font-display text-4xl font-extrabold text-white sm:text-5xl">
                 <span className="text-gradient">

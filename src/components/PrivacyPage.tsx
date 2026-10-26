@@ -1,4 +1,4 @@
-import { WHATSAPP_DISPLAY } from "@/lib/utils";
+import { CONTACT_EMAIL, WHATSAPP_DISPLAY } from "@/lib/utils";
 import { LegalBlock, LegalLayout } from "./LegalLayout";
 
 export function PrivacyPage() {
@@ -16,10 +16,10 @@ export function PrivacyPage() {
           O controlador é a Núcleo ProAudio, distribuidora oficial Mackie no Brasil, com
           atendimento em São Paulo e contato pelo e-mail{" "}
           <a
-            href="mailto:contato@nucleoproaudio.com.br"
+            href={`mailto:${CONTACT_EMAIL}`}
             className="text-slate-300 underline decoration-line underline-offset-4 hover:text-brand"
           >
-            contato@nucleoproaudio.com.br
+            {CONTACT_EMAIL}
           </a>{" "}
           ou WhatsApp {WHATSAPP_DISPLAY}.
         </p>
@@ -71,7 +71,7 @@ export function PrivacyPage() {
         <p>
           Você pode solicitar confirmação de tratamento, acesso, correção, anonimização, portabilidade,
           informação sobre compartilhamentos e revogação de consentimento, nos termos da LGPD. Para
-          exercer esses direitos, escreva para contato@nucleoproaudio.com.br. Também é possível
+          exercer esses direitos, escreva para {CONTACT_EMAIL}. Também é possível
           apresentar reclamação à Autoridade Nacional de Proteção de Dados (ANPD).
         </p>
       </LegalBlock>

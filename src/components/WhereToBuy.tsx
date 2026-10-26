@@ -1,10 +1,6 @@
 import { motion } from "framer-motion";
 import { BrazilMap } from "./BrazilMap";
-import { WHATSAPP_NUMBER } from "@/lib/utils";
-
-const dealerUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-  "Olá! Vim pelo site da Núcleo ProAudio e quero falar com o representante da minha região.",
-)}`;
+import { WHATSAPP_URL } from "@/lib/utils";
 
 export function WhereToBuy() {
   return (
@@ -26,7 +22,7 @@ export function WhereToBuy() {
             Clique no estado para ver as lojas. Depois use o botão para falar no WhatsApp.
           </p>
           <a
-            href={dealerUrl}
+            href={WHATSAPP_URL}
             target="_blank"
             rel="noreferrer"
             className="mt-8 inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-white to-white px-4 py-2 text-sm font-semibold text-ink-950 shadow-glow-sm transition-all hover:scale-[1.03] hover:to-[#a97c50] active:scale-95"
@@ -40,10 +36,10 @@ export function WhereToBuy() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.08 }}
-          className="relative min-w-0"
+          className="relative min-w-0 max-sm:overflow-visible"
         >
           <div className="pointer-events-none absolute inset-[8%] rounded-full bg-brand/15 blur-3xl" />
-          <div className="relative mx-auto w-full max-w-3xl">
+          <div className="relative mx-auto w-[112%] max-w-none -translate-x-[5.35%] sm:w-full sm:max-w-3xl sm:translate-x-0">
             <BrazilMap />
           </div>
         </motion.div>

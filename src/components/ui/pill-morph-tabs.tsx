@@ -86,7 +86,7 @@ export default function PillMorphTabs({
         <div
           ref={listRef}
           className={cn(
-            "relative inline-flex max-w-full items-center gap-2 overflow-x-auto rounded-full p-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden",
+            "relative inline-flex max-w-full items-center gap-2 overflow-x-auto overscroll-x-contain touch-pan-x rounded-full p-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden",
             "border border-white/10 bg-white/[0.04] backdrop-blur-sm",
           )}
         >
@@ -132,7 +132,7 @@ export default function PillMorphTabs({
             />
           )}
 
-          <TabsList className="relative flex gap-1 bg-transparent p-1 text-slate-400">
+          <TabsList className="relative flex w-max min-w-full gap-1 bg-transparent p-1 text-slate-400">
             {items.map((it) => {
               const isActive = it.value === value;
               return (
@@ -143,7 +143,7 @@ export default function PillMorphTabs({
                     triggerRefs.current[it.value] = el;
                   }}
                   className={cn(
-                    "relative z-10 shrink-0 rounded-full px-3 py-2 text-sm font-medium shadow-none transition-colors sm:px-4",
+                    "relative z-10 shrink-0 touch-pan-x rounded-full px-3 py-2 text-sm font-medium shadow-none transition-colors sm:px-4",
                     "data-[state=active]:bg-transparent data-[state=active]:shadow-none",
                     isActive ? "text-white" : "text-slate-400 hover:text-white",
                   )}

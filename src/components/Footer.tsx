@@ -23,14 +23,14 @@ export function Footer() {
     <footer className="border-t border-line bg-ink-950">
       <NewsletterBar />
       <div className="container-x py-14">
-        <div className="grid gap-10 lg:grid-cols-[1.3fr_0.9fr_0.9fr_0.9fr]">
-          <div>
+        <div className="grid gap-10 text-center lg:grid-cols-[1.3fr_0.9fr_0.9fr_0.9fr] lg:text-left">
+          <div className="flex flex-col items-center lg:items-start">
             <Logo />
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-slate-400">
               Distribuidora oficial Mackie no Brasil. Equipamentos de áudio profissional com suporte
               técnico especializado, garantia e pós venda com excelência!
             </p>
-            <div className="mt-5 flex gap-3">
+            <div className="mt-5 flex justify-center gap-3 lg:justify-start">
               <a
                 href={WHATSAPP_URL}
                 target="_blank"
@@ -106,23 +106,23 @@ export function Footer() {
                 </li>
               ))}
             </ul>
+            <p className="mt-5 text-xs text-slate-500">
+              Desenvolvido por{" "}
+              <a
+                href="https://qeel.com.br"
+                target="_blank"
+                rel="noreferrer"
+                className="text-slate-300 transition-colors hover:text-brand"
+              >
+                QeeL Tech
+              </a>
+            </p>
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-line pt-6 sm:flex-row sm:gap-4">
+        <div className="mt-12 border-t border-line pt-6 text-center sm:text-left">
           <p className="text-xs text-slate-500">
             © {new Date().getFullYear()} Núcleo ProAudio · Distribuidor oficial Mackie no Brasil.
-          </p>
-          <p className="text-xs text-slate-500">
-            Desenvolvido por{" "}
-            <a
-              href="https://qeel.com.br"
-              target="_blank"
-              rel="noreferrer"
-              className="text-slate-300 transition-colors hover:text-brand"
-            >
-              QeeL Tech
-            </a>
           </p>
         </div>
       </div>

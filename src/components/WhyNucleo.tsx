@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { BookOpen, Download, Wrench, ShieldCheck } from "lucide-react";
-import { WHATSAPP_NUMBER } from "@/lib/utils";
+import { WHATSAPP_URL } from "@/lib/utils";
 
 const pillars = [
   {
@@ -13,25 +13,19 @@ const pillars = [
     icon: Download,
     title: "Downloads",
     desc: "Firmware, drivers e arquivos de setup para baixar quando precisar.",
-    href: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-      "Olá! Vim pelo site da Núcleo ProAudio e gostaria de um download (firmware, driver ou setup).",
-    )}`,
+    href: WHATSAPP_URL,
   },
   {
     icon: Wrench,
     title: "Assistência",
     desc: "Suporte técnico e encaminhamento de reparo para manter o sistema no ar.",
-    href: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-      "Olá! Vim pelo site da Núcleo ProAudio e preciso de assistência técnica.",
-    )}`,
+    href: WHATSAPP_URL,
   },
   {
     icon: ShieldCheck,
     title: "Garantia",
     desc: "Garantia de fábrica Mackie, com procedência oficial no Brasil.",
-    href: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-      "Olá! Vim pelo site da Núcleo ProAudio e gostaria de falar sobre garantia Mackie.",
-    )}`,
+    href: WHATSAPP_URL,
   },
 ];
 

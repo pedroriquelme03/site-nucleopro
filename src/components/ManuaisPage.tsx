@@ -1,8 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { CheckCircle2, FileUp, Send, X } from "lucide-react";
 import { catalogCategories, catalogProducts } from "@/data/catalog";
-
-const CONTACT_EMAIL = "contato@nucleoproaudio.com.br";
+import { CONTACT_EMAIL } from "@/lib/utils";
 const MAX_FILE_BYTES = 8 * 1024 * 1024;
 const ACCEPTED_TYPES = ["application/pdf", "image/jpeg", "image/png", "image/webp"];
 

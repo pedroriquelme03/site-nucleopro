@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Send } from "lucide-react";
-
-const NEWSLETTER_EMAIL = "contato@nucleoproaudio.com.br";
+import { CONTACT_EMAIL } from "@/lib/utils";
 
 function formatWhatsapp(value: string) {
   const digits = value.replace(/\D/g, "").slice(0, 11);
@@ -40,7 +39,7 @@ export function NewsletterBar() {
 
     setSending(true);
     try {
-      const response = await fetch(`https://formsubmit.co/ajax/${NEWSLETTER_EMAIL}`, {
+      const response = await fetch(`https://formsubmit.co/ajax/${CONTACT_EMAIL}`, {
         method: "POST",
         headers: { Accept: "application/json" },
         body: data,
@@ -56,7 +55,7 @@ export function NewsletterBar() {
 
   return (
     <div className="border-b border-line bg-ink-900/50">
-      <div className="container-x flex flex-col gap-3 py-4 lg:flex-row lg:items-center lg:justify-between lg:gap-8 lg:py-3.5">
+      <div className="container-x flex flex-col gap-3 py-12 lg:flex-row lg:items-center lg:justify-between lg:gap-8 lg:py-10">
         <div className="min-w-0 max-w-md shrink-0">
           <p className="font-display text-base font-bold text-white">Newsletter</p>
           <p className="mt-0.5 text-sm leading-snug text-slate-400">

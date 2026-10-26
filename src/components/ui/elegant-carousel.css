@@ -42,6 +42,10 @@
   line-height: 1.15;
 }
 
+.carousel-heading-mobile {
+  display: none;
+}
+
 .carousel-title,
 .carousel-subtitle,
 .carousel-description {
@@ -213,6 +217,19 @@
 }
 
 @media (max-width: 900px) {
+  .carousel-heading-mobile {
+    position: relative;
+    z-index: 1;
+    display: block;
+    margin: 0;
+    padding: 2rem 1.25rem 0.75rem;
+    text-align: center;
+  }
+
+  .carousel-heading-desktop {
+    display: none;
+  }
+
   .carousel-inner {
     min-height: 0;
     grid-template-columns: 1fr;
@@ -221,7 +238,7 @@
   .carousel-image-container {
     order: -1;
     min-height: 0;
-    padding: 1.25rem 1.25rem 0;
+    padding: 0.5rem 1.25rem 0;
   }
 
   .carousel-image-frame {

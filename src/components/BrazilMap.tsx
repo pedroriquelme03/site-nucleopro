@@ -4,7 +4,7 @@ import {
   SELECT_DEALER_EVENT,
   type SelectDealerDetail,
 } from "@/lib/select-dealer";
-import { WHATSAPP_NUMBER } from "@/lib/utils";
+import { WHATSAPP_URL } from "@/lib/utils";
 import { WhatsAppIcon } from "./WhatsAppIcon";
 import "./brazil-map.css";
 
@@ -232,12 +232,7 @@ export function BrazilMap() {
     : [];
   const showPanel = Boolean(selected);
   const uncovered = Boolean(selected && dealers.length === 0);
-  const uncoveredWhatsApp =
-    selected && dealers.length === 0
-      ? `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-          `Olá! Vim pelo site da Núcleo ProAudio. Ainda não encontrei loja em ${selected.name}. Podem me ajudar?`,
-        )}`
-      : "";
+  const uncoveredWhatsApp = selected && dealers.length === 0 ? WHATSAPP_URL : "";
   const width = wrapRef.current?.clientWidth ?? 480;
   const cardX = active ? Math.min(Math.max(active.x, 136), width - 136) : 0;
   const cardY = active ? Math.max(active.y, 12) : 0;

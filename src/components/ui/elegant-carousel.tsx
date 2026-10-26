@@ -146,11 +146,15 @@ export default function ElegantCarousel({
         }}
       />
 
+      {heading ? (
+        <p className="carousel-heading carousel-heading-mobile text-gradient">{heading}</p>
+      ) : null}
+
       <div className="carousel-inner">
         <div className="carousel-content">
           <div className="carousel-content-inner">
             {heading ? (
-              <p className="carousel-heading text-gradient">{heading}</p>
+              <p className="carousel-heading carousel-heading-desktop text-gradient">{heading}</p>
             ) : null}
             <h2 className={`carousel-title ${isTransitioning ? "transitioning" : "visible"}`}>
               {currentSlide.title}

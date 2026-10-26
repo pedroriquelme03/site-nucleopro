@@ -417,13 +417,6 @@ export const dealersByState: Record<string, Representative[]> = {
       whatsapp: "https://wa.me/55119925855820?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20ALEXANDRE%20MOYSES%20COMERCIO%20DE%20EQUIPAMENTOS.",
     },
     {
-      name: "FABIO SHIGUERU TOKUMOTO",
-      region: "São Paulo — SP",
-      phone: "(11) 94590-1414",
-      email: "nfe@kadenzaa.com.br",
-      whatsapp: "https://wa.me/5511945901414?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20N%C3%BAcleo%20ProAudio%20e%20gostaria%20de%20falar%20com%20a%20loja%20FABIO%20SHIGUERU%20TOKUMOTO.",
-    },
-    {
       name: "KINGDOM SOUND IMAGEM E SOM LTDA",
       region: "São Paulo — SP",
       phone: "(11) 98317-8760",

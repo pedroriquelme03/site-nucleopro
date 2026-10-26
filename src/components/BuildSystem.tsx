@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { WHATSAPP_NUMBER } from "@/lib/utils";
+import { WHATSAPP_URL } from "@/lib/utils";
 
 const ambientes = [
   { value: "igreja", label: "Igreja" },
@@ -121,17 +121,7 @@ export function BuildSystem() {
       return;
     }
 
-    const message = `Olá! Vim pelo site da Núcleo ProAudio e quero montar um sistema.
-Ambiente: ${ambienteLabel}
-Tamanho: ${tamanhoLabel}
-Uso: ${usoLabel}
-Sugestão: ${result.title} (${result.items.join(", ")})`;
-
-    window.open(
-      `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`,
-      "_blank",
-      "noreferrer",
-    );
+    window.open(WHATSAPP_URL, "_blank", "noreferrer");
   };
 
   const handleBack = () => {
@@ -204,9 +194,7 @@ Sugestão: ${result.title} (${result.items.join(", ")})`;
                   </button>
                 ) : (
                   <a
-                    href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-                      "Olá! Vim pelo site da Núcleo ProAudio e gostaria de ajuda para montar um sistema.",
-                    )}`}
+                    href={WHATSAPP_URL}
                     target="_blank"
                     rel="noreferrer"
                     className="flex items-center gap-1 text-sm text-brand hover:underline"
