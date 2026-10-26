@@ -9,6 +9,7 @@ type PartnerLogo = Logo & SelectDealerDetail;
 const darkCardLogos = new Set([
   "a-musical",
   "alberto-teclados",
+  "armazem-do-musico",
   "arte-som",
   "beaver-music",
   "musica-center",
