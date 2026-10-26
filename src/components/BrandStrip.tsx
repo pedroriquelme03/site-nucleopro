@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 const logos = [
-  { src: "/parceiros/mackie.webp", alt: "Mackie" },
+  { src: "/parceiros/mackie.svg", alt: "Mackie" },
   { src: "/parceiros/qsc.webp", alt: "QSC" },
   { src: "/parceiros/electro-voice.webp", alt: "Electro-Voice" },
   { src: "/parceiros/rcf.webp", alt: "RCF" },

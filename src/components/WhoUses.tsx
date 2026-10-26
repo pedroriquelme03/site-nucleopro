@@ -5,6 +5,18 @@ const base = "/lojas-parceiras";
 
 type PartnerLogo = Logo & SelectDealerDetail;
 
+/** Logos with white artwork — black card + white ring so they don't vanish */
+const darkCardLogos = new Set([
+  "a-musical",
+  "alberto-teclados",
+  "arte-som",
+  "beaver-music",
+  "musica-center",
+  "musical-center-som",
+  "musitech-instrumentos",
+  "rck-audio",
+]);
+
 const logos: PartnerLogo[] = [
   {
     id: "a-musical",
@@ -165,7 +177,7 @@ const logos: PartnerLogo[] = [
     dealerName: "X5 - INSTRUMENTOS MUSICAIS LTDA",
     label: "X5 Music",
   },
-];
+].map((logo) => (darkCardLogos.has(logo.id) ? { ...logo, darkCard: true } : logo));
 
 export function WhoUses() {
   return (

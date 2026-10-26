@@ -31,7 +31,7 @@ export function MarcasPage() {
               <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-brand/15 blur-3xl" />
               <div className="absolute inset-0 bg-grid-fade [background-size:22px_22px] opacity-30" />
               <img
-                src="/parceiros/mackie.webp"
+                src="/parceiros/mackie.svg"
                 alt="Mackie"
                 className="relative h-14 w-auto object-contain sm:h-16 lg:h-20"
               />

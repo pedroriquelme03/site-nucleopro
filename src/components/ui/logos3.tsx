@@ -7,6 +7,8 @@ export interface Logo {
   description: string;
   image?: string;
   className?: string;
+  /** Logos with white artwork: black card + white outline so they stay visible */
+  darkCard?: boolean;
 }
 
 interface Logos3Props {
@@ -77,7 +79,10 @@ const Logos3 = ({
                         disabled={!clickable}
                         onClick={() => onLogoClick?.(logo)}
                         className={cn(
-                          "flex h-24 w-full items-center justify-center rounded-xl bg-white p-4 shadow-sm ring-1 ring-black/5 transition duration-300",
+                          "flex h-24 w-full items-center justify-center rounded-xl p-4 shadow-sm transition duration-300",
+                          logo.darkCard
+                            ? "bg-black ring-1 ring-white"
+                            : "bg-white ring-1 ring-black/5",
                           clickable &&
                             "cursor-pointer hover:-translate-y-1 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand",
                           !clickable && "pointer-events-none",
