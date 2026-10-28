@@ -1,10 +1,17 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Globe, Instagram, LayoutGrid } from "lucide-react";
-import { INSTAGRAM_URL, WHATSAPP_URL } from "@/lib/utils";
+import { ArrowUpRight, Globe, LayoutGrid, Users } from "lucide-react";
+import { WHATSAPP_URL } from "@/lib/utils";
 import { WhatsAppIcon } from "./WhatsAppIcon";
 
 const links = [
+  {
+    label: "Quem somos",
+    desc: "Conheça a Núcleo ProAudio",
+    href: "/sobre-nos",
+    external: false,
+    icon: Users,
+  },
   {
     label: "Contato",
     desc: "Fale com a Núcleo no WhatsApp",
@@ -13,25 +20,18 @@ const links = [
     icon: WhatsAppIcon,
   },
   {
-    label: "Redes",
-    desc: "Instagram @nucleoproaudio",
-    href: INSTAGRAM_URL,
-    external: true,
-    icon: Instagram,
-  },
-  {
-    label: "Catálogo",
-    desc: "Linha Mackie no Brasil",
-    href: "/#produtos",
-    external: false,
-    icon: LayoutGrid,
-  },
-  {
     label: "Site",
     desc: "Acesse o site completo",
     href: "/",
     external: false,
     icon: Globe,
+  },
+  {
+    label: "Catálogo",
+    desc: "Linha Mackie no Brasil",
+    href: "/catalogo",
+    external: false,
+    icon: LayoutGrid,
   },
 ];
 
