@@ -372,7 +372,7 @@ export const catalogProducts: CatalogProduct[] = [
     category: "mixers-digitais",
     tagline: "Mixer digital de 32 canais para rack",
     description:
-      "32 entradas com pré-amplificadores Onyx+, interface USB 16×16 e controle pelo app Master Fader SE. Design de caixa de palco com suportes para rack e processamento completo, controlável por até 20 dispositivos simultâneos.",
+      "32 entradas com pré-amplificadores Onyx+, interface USB 32×32 e controle pelo app Master Fader SE. Design de caixa de palco com suportes para rack e processamento completo, controlável por até 20 dispositivos simultâneos.",
   },
   {
     slug: "master-fader-5se",
